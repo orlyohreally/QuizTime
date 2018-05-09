@@ -1,0 +1,28 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tests</title>
+        <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/admin-page-styles.css' %}">
+    </head>
+    <body>
+
+    {%include "tests/menu-nav.html"%}
+    
+    <div id = "page-wrapper">
+        <div class = "page-title"><h1>Title</h1></div>
+        <div class = "page-content">
+            {% for test in tests %}
+            <span>{{test.name}}</span>
+            {% if test.question_set.all|length > 0 %}
+            <p>{% for q in test.question_set.all %}
+                <span>{{q.question_text}}</span>
+                {% endfor %}
+            </p>
+            {%endif %}
+            {% endfor %}
+        </div>
+    </div>
+    </body>
+</html>

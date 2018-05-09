@@ -1,0 +1,11 @@
+<div id = "topics">
+    <h1>Topics</h1>
+    <a *ngFor="let topic of topics.results" class = "topic" routerLink = "#">
+        <img class = "topic-icon" src = "/assets/drilling.svg %}"/>
+        <div class = "topic-description">
+            <span class = "topic-name">{{topic.name}}</span>
+            <span class = "topic-stats">3 quizzes</span>
+        </div>
+    </a>
+    <a href = "#" class = "topic-all"><span class = "fa fa-arrow-right"></span></a>
+</div>

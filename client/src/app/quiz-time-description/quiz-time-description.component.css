@@ -1,0 +1,43 @@
+#description {
+    width: fit-content;
+    height: 70%;
+    align-items: center;
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0 auto;
+}
+#description:after, #description .banner:after {
+    content: '';
+    clear: both;
+    display: table;
+}
+#description .description-text {
+    width:40%;
+    padding: 50px;
+    display: inline-block;
+    text-align: center;
+}
+#description .banner {
+    height: 500px; /*100%;*/
+    width: 60%;
+    background-size: contain!important;
+}
+#description .banner img {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+}
+@media (max-width: 768px) {
+    #description {
+        flex-wrap: wrap;
+        height: fit-content;
+    }
+    #description .description-text {
+        width: 100%;
+    }
+    #description .banner {
+        width: 100%;
+        background-size: contain!important;
+        height: 200px;
+    }
+}

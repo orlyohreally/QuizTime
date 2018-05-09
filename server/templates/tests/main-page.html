@@ -1,0 +1,75 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tests</title>
+        <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/main-page-styles.css' %}">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    </head>
+    <body>
+
+        {%include "tests/menu-nav.html"%}
+        <div id = "page-wrapper">
+            <div id = "description">
+                <div class = "description-text">
+                    <h1>Need to practice? Find the perfect quiz for yourself!</h1>
+                    <h2>No more boring preparing for exams!</h2>
+                </div>
+                <div class = "banner"  style = "background: url({%static '/assets/banner-idea.jpg'%}) center top no-repeat;"></div>
+                <!--<div class = "banner"><img src = "{%static '/assets/banner-idea.jpg'%}" /></div>-->
+            </div>
+       
+            <div id = "steps">
+                <h1>Quiz time has everything you need to practice for your exams</h1>
+                <div class = "step">
+                    <img class = "step-icon" src = "{% static 'assets/search-engine.svg'%}"/>
+                    <h3 class = "step-text">Find the quiz using our user-friendly search engine</h3>
+                </div>
+                <div class = "step">
+                    <img class = "step-icon" src = "{% static 'assets/test.svg'%}"/>
+                    <h3 class = "step-text">Answer questions in time of your chose</h3>
+                </div>
+                <div class = "step">
+                    <img class = "step-icon" src = "{% static 'assets/test (1).svg'%}"/>
+                    <h3 class = "step-text">Get your mark and look at your correct and wrong answers</h3>
+                </div>
+                <div class = "step">
+                    <img class = "step-icon" src = "{% static 'assets/browser.svg'%}"/>
+                    <h3 class = "step-text">Log in or sign up to save your results</h3>
+                </div>
+                <div class = "step">
+                    <img class = "step-icon" src = "{% static 'assets/line-chart.svg'%}"/>
+                    <h3 class = "step-text">Track your progress</h3>
+                </div>
+            </div>
+            
+            <div id = "topics">
+                <h1>Topics</h1>
+                <a  class = "topic" href = "#">
+                    <img class = "topic-icon" src = "{% static '/assets/drilling.svg' %}"/>
+                    <div class = "topic-description">
+                        <span class = "topic-name">Biology</span>
+                        <span class = "topic-stats">3 quizzes</span>
+                    </div>
+                </a>
+                
+                <a class = "topic" href = "#">
+                    <img class = "topic-icon" src = "{% static '/assets/blackboard.svg' %}"/>
+                    <div class = "topic-description">
+                        <span class = "topic-name">Math</span>
+                        <span class = "topic-stats">5 quizzes</span>
+                    </div>
+                </a>
+                <a class = "topic" href = "#">
+                    <img class = "topic-icon" src = "{% static '/assets/violin.svg' %}"/>
+                    <div class = "topic-description">
+                        <span class = "topic-name">Arts</span>
+                        <span class = "topic-stats">7 quizzes</span>
+                    </div>
+                </a>
+                <a href = "#" class = "topic-all"><span class = "fa fa-arrow-right"></span></a>
+            </div>
+        </div>
+    </body>
+</html>
