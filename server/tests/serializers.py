@@ -8,14 +8,15 @@ class TestSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Test
-        fields = ('id', 'url', 'name', 'pub_date', 'creator')
+        fields = ('id', 'url', 'name', 'pub_date', 'creator', 'topic', 'slug', )
         
 class TopicSerializer(serializers.HyperlinkedModelSerializer):
     creator = serializers.ReadOnlyField(source = 'creator.username')
+    creat_date = serializers.ReadOnlyField()
 
     class Meta:
         model = Topic
-        fields = ('id', 'name', 'creat_date', 'creator')
+        fields = ('id', 'name', 'creat_date', 'creator', 'icon')
 
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
