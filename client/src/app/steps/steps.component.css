@@ -1,0 +1,38 @@
+#steps {
+    width: 90%;
+    margin: 5%;
+}
+#steps h1 {
+    text-align: center;
+}
+#steps .step {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    margin-bottom: 20px;
+}
+#steps .step:last-child {
+    margin-bottom: 0;
+}
+.step .step-icon {
+    width: 50%;
+    max-width: 150px;
+}
+.step:nth-child(2n) {
+    flex-direction: row-reverse;
+}
+.step .step-text {
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width: 425px) {
+    #steps .step {
+        flex-wrap: wrap;
+    }
+    #steps .step .step-icon {
+        margin: auto;
+    }
+}

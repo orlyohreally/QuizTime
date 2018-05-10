@@ -1,3 +1,7 @@
-<p>
-  steps works!
-</p>
+<div id = "steps">
+    <h1>Quiz time has everything you need to practice for your exams</h1>
+    <div *ngFor="let step of steps.results" class = "step">
+        <img class = "step-icon" src = "{{step.icon}}"/>
+        <h3 class = "step-text">{{step.text}}</h3>
+    </div>
+</div>

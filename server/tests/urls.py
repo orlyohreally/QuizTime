@@ -9,8 +9,10 @@ router = DefaultRouter()
 router.register(r'quizzes', views.TestViewSet)
 router.register(r'users', views.UserViewSet)
 router.register(r'topics', views.TopicViewSet)
+router.register(r'steps', views.StepViewSet)
 
 urlpatterns = [
+    url(r'auth/', include('rest_framework.urls')),
     url(r'^schema/$', schema_view),
     url(r'^', include(router.urls))
 ]

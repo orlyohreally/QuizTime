@@ -1,6 +1,6 @@
-from tests.models import Test, Topic
+from tests.models import Test, Topic, Step
 from django.contrib.auth.models import User
-from tests.serializers import TestSerializer, UserSerializer, TopicSerializer
+from tests.serializers import TestSerializer, UserSerializer, TopicSerializer, StepSerializer
 from rest_framework import permissions
 from tests.permissions import IsCreatorOrReadOnly
 from rest_framework.decorators import api_view, detail_route
@@ -34,3 +34,7 @@ class TopicViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     def perform_create(self, serializer):
         serializer.save(creator = self.request.user)
+class StepViewSet(viewsets.ModelViewSet):
+    queryset = Step.objects.all()
+    serializer_class = StepSerializer
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
