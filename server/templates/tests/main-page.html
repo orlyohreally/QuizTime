@@ -46,30 +46,81 @@
             
             <div id = "topics">
                 <h1>Topics</h1>
-                <a  class = "topic" href = "#">
-                    <img class = "topic-icon" src = "{% static '/assets/drilling.svg' %}"/>
-                    <div class = "topic-description">
-                        <span class = "topic-name">Biology</span>
-                        <span class = "topic-stats">3 quizzes</span>
-                    </div>
-                </a>
-                
-                <a class = "topic" href = "#">
-                    <img class = "topic-icon" src = "{% static '/assets/blackboard.svg' %}"/>
-                    <div class = "topic-description">
-                        <span class = "topic-name">Math</span>
-                        <span class = "topic-stats">5 quizzes</span>
-                    </div>
-                </a>
-                <a class = "topic" href = "#">
-                    <img class = "topic-icon" src = "{% static '/assets/violin.svg' %}"/>
-                    <div class = "topic-description">
-                        <span class = "topic-name">Arts</span>
-                        <span class = "topic-stats">7 quizzes</span>
-                    </div>
-                </a>
-                <a href = "#" class = "topic-all"><span class = "fa fa-arrow-right"></span></a>
+                <div class = "topics-list">
+                    <a  class = "topic" href = "#">
+                        <img class = "topic-icon" src = "{% static '/assets/drilling.svg' %}"/>
+                        <div class = "topic-description">
+                            <span class = "topic-name">Biology</span>
+                            <span class = "topic-stats">3 quizzes</span>
+                        </div>
+                    </a>
+                    
+                    <a class = "topic" href = "#">
+                        <img class = "topic-icon" src = "{% static '/assets/blackboard.svg' %}"/>
+                        <div class = "topic-description">
+                            <span class = "topic-name">Math</span>
+                            <span class = "topic-stats">5 quizzes</span>
+                        </div>
+                    </a>
+                    <a class = "topic" href = "#">
+                        <img class = "topic-icon" src = "{% static '/assets/violin.svg' %}"/>
+                        <div class = "topic-description">
+                            <span class = "topic-name">Arts</span>
+                            <span class = "topic-stats">7 quizzes</span>
+                        </div>
+                    </a>
+                    <a href = "#" class = "topic-all"><span class = "fa fa-arrow-right"></span></a>
+                </div>
             </div>
+            
+            <div id = "quizzes">
+                <h1>Popular quizzes</h1>
+                <div class = "quizzes-list">
+                    <a  class = "quiz" href = "#">
+                        <div class = "quiz-description">
+                            <img class = "quiz-icon" src = "{% static '/assets/blackboard.svg' %}"/>
+                            <span class = "quiz-name">Introduction to the history of Art 101</span>
+                        </div>
+                        <div class = "quiz-details">
+                            <span class = "quiz-topic">Math</span> <span class = "quiz-stats">5 questions</span>
+                            <ul class = "quiz-subjects">
+                                <li class = "quiz-subject">Subject subject 1</li>
+                                <li class = "quiz-subject">Subject subject 2</li>
+                            </ul>
+                            
+                        </div>
+                    </a>
+                    <a class = "quiz" href = "#">
+                        <div class = "quiz-description">
+                            <img class = "quiz-icon" src = "{% static '/assets/blackboard.svg' %}"/>
+                            <span class = "quiz-name">Introduction to the history of Art 101</span>
+                        </div>
+                        <div class = "quiz-details">
+                            <span class = "quiz-topic">Math</span> <span class = "quiz-stats">5 questions</span>
+                            <ul class = "quiz-subjects">
+                                <li class = "quiz-subject">Subject subject 1</li>
+                                <li class = "quiz-subject">Subject subject 2</li>
+                            </ul>
+                        </div>
+                    </a>
+                    <a class = "quiz" href = "#">
+                        <div class = "quiz-description">
+                            <img class = "quiz-icon" src = "{% static '/assets/blackboard.svg' %}"/>
+                            <span class = "quiz-name">Introduction to the history of Art 101</span>
+                        </div>
+                        <div class = "quiz-details">
+                            <span class = "quiz-topic">Math</span> <span class = "quiz-stats">5 questions</span>
+                            <ul class = "quiz-subjects">
+                                <li class = "quiz-subject">Subject subject 1</li>
+                                <li class = "quiz-subject">Subject subject 2</li>
+                            </ul>
+                            
+                        </div>
+                    </a>
+                    <a href = "#" class = "quiz-all"><span class = "fa fa-arrow-right"></span></a>
+                </div>
+            </div>
+            
         </div>
     </body>
 </html>

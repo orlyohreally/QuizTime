@@ -10,6 +10,8 @@ from rest_framework import viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
+from django.shortcuts import render
+
 class TestViewSet(viewsets.ModelViewSet):
     queryset = Test.objects.all()
     serializer_class = TestSerializer
@@ -34,7 +36,11 @@ class TopicViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     def perform_create(self, serializer):
         serializer.save(creator = self.request.user)
+
 class StepViewSet(viewsets.ModelViewSet):
     queryset = Step.objects.all()
     serializer_class = StepSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
+
+def template(request):	
+	return render(request, "tests\main-page.html", {})

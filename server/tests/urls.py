@@ -14,5 +14,6 @@ router.register(r'steps', views.StepViewSet)
 urlpatterns = [
     url(r'auth/', include('rest_framework.urls')),
     url(r'^schema/$', schema_view),
-    url(r'^', include(router.urls))
+    url(r'^', include(router.urls)),
+    url(r'^template', views.template),
 ]

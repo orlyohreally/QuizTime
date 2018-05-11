@@ -11,10 +11,9 @@ class TestSerializer(serializers.HyperlinkedModelSerializer):
 class TopicSerializer(serializers.HyperlinkedModelSerializer):
     creator = serializers.ReadOnlyField(source = 'creator.username')
     creat_date = serializers.ReadOnlyField()
-    
     class Meta:
         model = Topic
-        fields = ('id', 'name', 'creat_date', 'creator', 'icon')
+        fields = ('id', 'name', 'creat_date', 'creator', 'icon', 'test_set',)
 class StepSerializer(serializers.HyperlinkedModelSerializer):
     
     class Meta:
