@@ -159,6 +159,7 @@ ul.nav-menu.mobile li a:hover {
     padding: 10px 20px;
     border: 1px solid #ffbe58;
     border-radius: 50px;
+    vertical-align: middle;
 }
 
 #topics .topic:last-child {
@@ -177,10 +178,11 @@ ul.nav-menu.mobile li a:hover {
 }
 #topics .topic-description {
     display: inline-block;
+    padding: 10px;
 }
 #topics .topic-description span {
     display: block;
-    text-align: left;
+    text-align: center;
 }
 #topics .topic-name {
     font-weight: bold;
@@ -257,6 +259,7 @@ ul.nav-menu.mobile li a:hover {
     padding: 10px 20px;
     border: 1px solid #ffbe58;
     border-radius: 50px;
+    vertical-align: middle;
 }
 
 #quizzes .quiz:last-child {
@@ -340,8 +343,10 @@ ul.nav-menu.mobile li a:hover {
         margin-right: auto;
         margin-bottom: 0;
     }
-    #topics .topic-all span {
+    #topics .topic-all {
         position: relative;
+    }
+    #topics .topic-all span {
         transform: rotate(90deg);
     }
     
@@ -355,8 +360,10 @@ ul.nav-menu.mobile li a:hover {
         margin-right: auto;
         margin-bottom: 0;
     }
-    #quizzes .quiz-all span {
+    #quizzes .quiz-all {
         position: relative;
+    }
+    #quizzes .quiz-all span {
         transform: rotate(90deg);
     }
 }
@@ -377,5 +384,72 @@ ul.nav-menu.mobile li a:hover {
     }
     #steps .step .step-icon {
         margin: auto;
+    }
+}
+
+
+
+footer {
+    background-color: rgba(255, 235, 59, 0.8);
+    padding: 2% 5%;
+}
+footer .social-links {
+    width: 30%;
+    margin-right: 2%;
+    display: inline-block;
+}
+
+footer ul.social-links-list {
+    padding: 0;
+    margin: 0;
+}
+ul.social-links-list li {
+    list-style: none;
+    display: block;
+    margin-bottom: 10px;
+}
+ul.social-links-list li a {
+    text-decoration: none;
+    color: #000;
+}
+li span.social-link-icon {
+    margin-right: 5px;
+}
+footer .subscription-form {
+    width: 67%;
+    display: inline-block;
+    vertical-align: top;
+}
+#subscription-form input {
+    padding: 10px 20px;
+    border: 1px solid #ffbe58;
+    border-radius: 50px;
+}
+input:focus, a:focus {
+    outline: none;
+}
+#subscription-form a {
+    border: 1px solid #ffbe58;
+    border-radius: 50px;
+    width: 20px;
+    padding: 10px 20px;
+    color: #000;
+    background-color: #fff;
+}
+#subscription-form a:hover {
+    color: #000;
+    background-color: rgba(109, 168, 214, 0.2); /*#5acde7;*/
+    border-color: #6da8d6; /*#5acde7;*/
+}
+
+@media (max-width: 768px) {
+    footer .social-links {
+        width: 100%;
+        margin-right: 0%;
+        text-align: center;
+    }
+    footer .subscription-form {
+        width: 100%;
+        text-align: center;
     }
 }
