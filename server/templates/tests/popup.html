@@ -1,0 +1,131 @@
+{% load staticfiles %}
+    <form id = "popup-form" class = "modal-form">
+        <h1>Form title</h1>
+        <div class = "modal-input-holder">
+            <label for = "name">label label labellabel</label>
+            <input id = "name" type = "text" placeholder = "put your name here"/>
+        </div>
+        <div class = "modal-input-holder">
+            <label for = "name">label</label>
+            <input id = "name" type = "text" placeholder = "put your name here"/>
+        </div>
+        <div class = "modal-input-holder">
+            <label for = "name">label</label>
+            <input id = "name" type = "text" placeholder = "put your name here"/>
+        </div>
+        <div class = "modal-input-holder">
+            <label for = "name">label</label>
+            <input id = "name" type = "text" placeholder = "put your name here"/>
+        </div>
+        <div class = "modal-input-holder">
+            <label for = "name">label</label>
+            <input id = "name" type = "text" placeholder = "put your name here"/>
+        </div>
+        <div class = "modal-input-holder">
+            <label for = "name">label</label>
+            <input id = "name" type = "text" placeholder = "put your name here"/>
+        </div>
+    </form>
+    
+    
+    <!--<div class = "dark-background">
+        <div class = "modal modal-large">
+            
+            <div class = "modal-close">
+                <span class = "fa fa-close"></span>
+            </div>
+        </div>
+    </div>-->
+    <style>
+    body {
+        overflow: hidden;
+    }
+    .dark-background {
+        background-color: rgba(0, 0, 0, 0.7);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 100;
+    }
+    .modal-form {
+        display: none;
+        
+    }
+    .modal {
+        background: #fff;
+        height: 50%;
+        width: 50%;
+        border-radius: 50px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        position: fixed;
+    }
+    .modal.modal-large {
+        height: 80%;
+        width: 50%;
+    }
+    .modal.modal-large-large {
+        height: 80%;
+        width: 70%;
+    }
+    .modal form {
+        padding: 0 20px;
+        overflow-y: auto;
+        height: calc(100% - 40px);
+        margin: 20px;
+    }
+    .modal form h1 {
+        text-align: center;
+    }
+    .modal-close {
+        position: fixed;
+        right: 25px;
+        top: 25px;
+        font-size: 140%;
+        cursor: pointer;
+    }
+    form .modal-input-holder {
+        margin-bottom: 10px;
+        text-align: left;
+    }
+    form input {
+        padding: 10px 20px;
+        border: 1px solid #ffbe58;
+        border-radius: 50px;
+        width: calc(100% - 40px);
+    }
+    form .modal-input-holder label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 600;
+    }
+    @media (max-width: 768px) {
+        form .modal-input-holder {
+            text-align: left;
+        }
+    }
+    </style>
+    <script>
+    $(document).ready(function() {
+        //$(".dark-background").height($(window).height());
+        var dark_background = $('<div/>');
+        
+        dark_background.addClass("dark-background");
+        $('body').append(dark_background);
+        var modal = $('<div/>');
+        modal.addClass("modal modal-large");
+        modal.html('<div class = "modal-close"><span class = "fa fa-close"></span></div>');
+        $('.dark-background').append(modal);
+        const form_html = $("#popup-form").html();
+        var form = $('<form/>');
+        form.attr('id', "popup-form");
+        console.log(form_html, form);
+        form.html(form_html);
+        modal.append(form);
+    });
+    
+   
+    </script>

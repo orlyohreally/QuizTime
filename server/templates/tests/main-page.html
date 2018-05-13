@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Tests</title>
+        <title>Quiz Time</title>
         <link rel="stylesheet" href="{% static 'font-awesome-4.7.0/css/font-awesome.min.css' %}">
         <link rel="stylesheet" href="{% static 'css/main-page-styles.css' %}">
         <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -120,24 +120,7 @@
                     <a href = "#" class = "quiz-all"><span class = "fa fa-arrow-right"></span></a>
                 </div>
             </div>
-            <footer>
-                <div class = "social-links">
-                    <h3>Get in touch</h3>
-                    <ul class = "social-links-list">
-                        <li class = "social-link"><span class = "social-link-icon fa fa-envelope-open"></span>quiztime@gmail.com</li>
-                        <li class = "social-link"><span class = "social-link-icon fa fa-phone"></span>123456789</li>
-                        <li class = "social-link"><span class = "social-link-icon fa fa-facebook"></span><a href = "#">quiztime</a></li>
-                        <li class = "social-link"><span class = "social-link-icon fa fa-instagram"></span><a href = "#">quiztime</a></li>
-                    </ul>
-                </div>
-                <div class = "subscription-form">
-                    <h3>Subscribe to get notifications</h3>
-                    <form id = "subscription-form">
-                        <input name = "email" type = "email" placeholder = "Enter your email">
-                        <a href = "#"><span class = "fa fa-arrow-right"></a>
-                    </form>
-                </div>
-            </footer>
+            {%include "tests/footer.html"%}
         </div>
     </body>
 </html>

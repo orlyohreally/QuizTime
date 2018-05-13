@@ -42,5 +42,7 @@ class StepViewSet(viewsets.ModelViewSet):
     serializer_class = StepSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
 
-def template(request):	
+def main_page_template(request):	
 	return render(request, "tests\main-page.html", {})
+def quizzes_template(request):	
+	return render(request, "tests\search-page.html", {})

@@ -1,0 +1,23 @@
+{% load staticfiles %}
+<footer>
+    <div class = "social-links">
+        <h3>Get in touch</h3>
+        <ul class = "social-links-list">
+            <li class = "social-link"><span class = "social-link-icon fa fa-envelope-open"></span>quiztime@gmail.com</li>
+            <li class = "social-link"><span class = "social-link-icon fa fa-phone"></span>123456789</li>
+            <li class = "social-link"><span class = "social-link-icon fa fa-facebook"></span><a href = "#">quiztime</a></li>
+            <li class = "social-link"><span class = "social-link-icon fa fa-instagram"></span><a href = "#">quiztime</a></li>
+        </ul>
+    </div>
+    <div class = "subscription-form">
+        <h3>Subscribe to get notifications</h3>
+        <form id = "subscription-form">
+            <div class = "email-holder">
+                <input name = "email" type = "email" placeholder = "Enter your email">
+                <a href = "#" class = "subscribe-button"><span class = "fa fa-arrow-right "></a>
+            </div>
+            
+        </form>
+    </div>
+    <img class = "logo" src="{% static 'assets/idea.svg' %}"></img>
+</footer>

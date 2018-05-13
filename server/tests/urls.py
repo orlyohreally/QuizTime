@@ -15,5 +15,6 @@ urlpatterns = [
     url(r'auth/', include('rest_framework.urls')),
     url(r'^schema/$', schema_view),
     url(r'^', include(router.urls)),
-    url(r'^template', views.template),
+    url(r'^main-page', views.main_page_template),
+    url(r'^quizzes', views.quizzes_template),
 ]
