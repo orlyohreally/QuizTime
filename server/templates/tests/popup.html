@@ -1,32 +1,20 @@
 {% load staticfiles %}
-    <form id = "popup-form" class = "modal-form">
-        <h1>Form title</h1>
-        <div class = "modal-input-holder">
-            <label for = "name">label label labellabel</label>
-            <input id = "name" type = "text" placeholder = "put your name here"/>
+    <div id = "page-wrapper">
+    <form id = "popup-form" class = "modal fade">
+        <h1>Login</h1>
+        <div class = "form-input-holder">
+            <label for = "login">Login</label>
+            <input id = "login" type = "text" placeholder = "Username or email"/>
         </div>
-        <div class = "modal-input-holder">
-            <label for = "name">label</label>
-            <input id = "name" type = "text" placeholder = "put your name here"/>
+        <div class = "form-input-holder">
+            <label for = "password">Password</label>
+            <input id = "password" type = "password" placeholder = "Password"/>
         </div>
-        <div class = "modal-input-holder">
-            <label for = "name">label</label>
-            <input id = "name" type = "text" placeholder = "put your name here"/>
-        </div>
-        <div class = "modal-input-holder">
-            <label for = "name">label</label>
-            <input id = "name" type = "text" placeholder = "put your name here"/>
-        </div>
-        <div class = "modal-input-holder">
-            <label for = "name">label</label>
-            <input id = "name" type = "text" placeholder = "put your name here"/>
-        </div>
-        <div class = "modal-input-holder">
-            <label for = "name">label</label>
-            <input id = "name" type = "text" placeholder = "put your name here"/>
+        <div class = "form-button-holder">
+            <button type = "submit" onclick = "$('#popup-form').modal('close')">Submit</button>
         </div>
     </form>
-    
+    </div>
     
     <!--<div class = "dark-background">
         <div class = "modal modal-large">
@@ -37,9 +25,6 @@
         </div>
     </div>-->
     <style>
-    body {
-        overflow: hidden;
-    }
     .dark-background {
         background-color: rgba(0, 0, 0, 0.7);
         position: absolute;
@@ -48,46 +33,49 @@
         left: 0;
         right: 0;
         z-index: 100;
+        overflow: auto;
     }
-    .modal-form {
+    .modal.fade {
         display: none;
-        
     }
-    .modal {
+    div.modal {
         background: #fff;
-        height: 50%;
+        /*height: 50%;*/
         width: 50%;
         border-radius: 50px;
-        top: 50%;
+        top: /*50%*/0;
+        
+        margin: 20px 0;
+        
         left: 50%;
-        transform: translate(-50%, -50%);
-        position: fixed;
+        transform: translate(-50%, /*-5*/0%);
+        position: /*fixed*/absolute;
     }
-    .modal.modal-large {
-        height: 80%;
-        width: 50%;
+    div.modal.modal-large {/*add new class, do not use div here and everywhere else*/
+        /*height: 80%;*/
+        width: 60%;
     }
-    .modal.modal-large-large {
-        height: 80%;
+    div.modal.modal-large-large {
+        /*height: 80%;*/
         width: 70%;
     }
-    .modal form {
+    form {
         padding: 0 20px;
-        overflow-y: auto;
-        height: calc(100% - 40px);
+        /*overflow-y: auto;
+        height: calc(100% - 40px);*/
         margin: 20px;
     }
-    .modal form h1 {
+    form h1 {
         text-align: center;
     }
     .modal-close {
         position: fixed;
         right: 25px;
-        top: 25px;
+        top: 15px;
         font-size: 140%;
         cursor: pointer;
     }
-    form .modal-input-holder {
+    form .form-input-holder {
         margin-bottom: 10px;
         text-align: left;
     }
@@ -97,34 +85,80 @@
         border-radius: 50px;
         width: calc(100% - 40px);
     }
-    form .modal-input-holder label {
+    form input:focus {
+       border-color: #659dd0;
+    }
+    form .form-input-holder label {
         display: block;
         margin-bottom: 10px;
         font-weight: 600;
     }
     @media (max-width: 768px) {
-        form .modal-input-holder {
+        form .form-input-holder {
             text-align: left;
         }
     }
+    form button {
+        display: inline-block;
+        border: 1px solid #ffbe58;
+        border-radius: 50px;
+        padding: 10px 20px;
+        margin-bottom: 10px;
+        color: #000;
+        background: #fff;
+        cursor: pointer;
+    }
+    form button:hover {
+        color: #000;
+        background-color: rgba(109, 168, 214, 0.2); /*#5acde7;*/
+        border-color: #6da8d6; /*#5acde7;*/
+    }
+    div.form-button-holder {
+        width: 100%;
+        text-align: center;
+    }
     </style>
     <script>
+    (function($){
+        $.fn.modal = function(action){
+            function close_modal(modal) {
+                //finding form in modal window to remove modal element completely
+                $("div.modal #" + $(modal).attr('id')).closest(".dark-background").remove();
+            };
+            
+            return this.each(function() {
+                var modal_obj = $(this);
+                if(action === "open") {
+                    $('body').css({'overflow': 'hidden'});
+                    var dark_background = $('<div/>');
+                    dark_background.addClass("dark-background");
+                    $('body').append(dark_background);
+                    var modal = $('<div/>');
+                    modal.addClass("modal modal-large");
+                    modal.html('<div class = "modal-close"><span class = "fa fa-close"></span></div>');
+                    $('.dark-background').append(modal);
+                    const form_html = $("#popup-form").html();
+                    var form = $('<form/>');
+                    form.attr('id', modal_obj.attr('id'));
+                    form.addClass('modal-obj');
+                    form.html(form_html);
+                    modal.append(modal_obj[0].outerHTML);
+                    $(".modal > #" + modal_obj.attr('id')).removeClass('fade');
+                    
+                }
+                if(action === "close") {
+                    $('body').css({'overflow': 'auto'});
+                    close_modal(modal_obj);
+                }
+                $(".modal-close").on('click', function(){
+                    //finding which modal this close button is assigned to and closing it
+                    $(this).closest('.modal').children('form').modal('close');
+                });
+            })
+        }
+    }(jQuery))
     $(document).ready(function() {
-        //$(".dark-background").height($(window).height());
-        var dark_background = $('<div/>');
-        
-        dark_background.addClass("dark-background");
-        $('body').append(dark_background);
-        var modal = $('<div/>');
-        modal.addClass("modal modal-large");
-        modal.html('<div class = "modal-close"><span class = "fa fa-close"></span></div>');
-        $('.dark-background').append(modal);
-        const form_html = $("#popup-form").html();
-        var form = $('<form/>');
-        form.attr('id', "popup-form");
-        console.log(form_html, form);
-        form.html(form_html);
-        modal.append(form);
+        //$("#popup-form").modal("open").modal("close");
     });
     
    

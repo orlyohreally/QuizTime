@@ -58,6 +58,10 @@ ul.nav-menu li {
     margin-right: 10px;
     display: inline-block;
 
+    border: 1px solid #ffbe58;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
 }
 ul.nav-menu li:last-child {
     margin-right: 0;
@@ -65,14 +69,14 @@ ul.nav-menu li:last-child {
 ul.nav-menu li a {
     color: #000;
     text-decoration: none;
-    border: 1px solid #ffbe58;
+    /*border: 1px solid #ffbe58;
     border-radius: 20px;
-    padding: 10px 20px;
+    padding: 10px 20px;*/
 }
-ul.nav-menu li.active a {
+ul.nav-menu li.active {
     border-color: #659dd0;
 }
-ul.nav-menu li a:hover {
+ul.nav-menu li:hover {
     color: #000;
     background-color: rgba(109, 168, 214, 0.2); /*#5acde7;*/
     border-color: #6da8d6; /*#5acde7;*/
@@ -445,7 +449,7 @@ footer .subscription-form {
     color: #000;
     background-color: #fff;
 }
-input:focus, a:focus, span:focus {
+input:focus, a:focus, span:focus, button:focus {
     outline: none;
 }
 #subscription-form a:hover {
