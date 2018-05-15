@@ -11,7 +11,7 @@
             <input id = "password" type = "password" placeholder = "Password"/>
         </div>
         <div class = "form-button-holder">
-            <button type = "submit" onclick = "$('#popup-form').modal('close')">Submit</button>
+            <button type = "button" onclick = "$('#popup-form').modal('open');">Submit</button>
         </div>
     </form>
     </div>
@@ -123,7 +123,7 @@
         $.fn.modal = function(action){
             function close_modal(modal) {
                 //finding form in modal window to remove modal element completely
-                $("div.modal #" + $(modal).attr('id')).closest(".dark-background").remove();
+                $("div.modal #" + $(modal).attr('id')).closest(".dark-background")[0].remove();
             };
             
             return this.each(function() {
@@ -144,16 +144,25 @@
                     form.html(form_html);
                     modal.append(modal_obj[0].outerHTML);
                     $(".modal > #" + modal_obj.attr('id')).removeClass('fade');
-                    
+                    modal.children(".modal-close").on('click', function(e){
+                        //finding which modal this close button is assigned to and closing it
+                        $(this).closest('.modal').children('form').modal('close');
+                        
+                    });
+                    dark_background.on('click', function(e){
+                        $(this).children('.modal').children('form').modal('close');
+                        $(this).blur();
+                    });
+                    modal.on('click', function(e) {
+                        e.stopPropagation();
+                    })
                 }
                 if(action === "close") {
-                    $('body').css({'overflow': 'auto'});
+                    if($(".dark-background").length == 0)
+                        $('body').css({'overflow': 'auto'});
                     close_modal(modal_obj);
                 }
-                $(".modal-close").on('click', function(){
-                    //finding which modal this close button is assigned to and closing it
-                    $(this).closest('.modal').children('form').modal('close');
-                });
+                
             })
         }
     }(jQuery))
