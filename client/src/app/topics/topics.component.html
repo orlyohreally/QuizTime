@@ -1,10 +1,10 @@
 <div id = "topics">
     <h1>Topics</h1>
-    <a *ngFor="let topic of topics.results" class = "topic" routerLink = "#">
+    <a *ngFor="let topic of topics.results|slice:0:3" class = "topic" routerLink = "#">
         <img class = "topic-icon" src = "{{topic.icon}}"/>
         <div class = "topic-description">
             <span class = "topic-name">{{topic.name}}</span>
-            <span class = "topic-stats">3 quizzes</span>
+            <span class = "topic-stats">{{topic.test_set.length}} quizzes</span>
         </div>
     </a>
     <a href = "#" class = "topic-all"><span class = "fa fa-arrow-right"></span></a>

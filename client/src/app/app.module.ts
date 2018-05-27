@@ -11,6 +11,7 @@ import { StepsComponent } from './steps/steps.component';
 import { TopicsComponent } from './topics/topics.component';
 import { TestService } from './test.service';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { LoginFormComponent } from './login-form/login-form.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,8 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
     LandingPageComponent,
     QuizTimeDescriptionComponent,
     StepsComponent,
-    TopicsComponent
+    TopicsComponent,
+    LoginFormComponent
   ],
   imports: [
     BrowserModule,

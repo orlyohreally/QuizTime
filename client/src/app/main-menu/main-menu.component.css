@@ -69,6 +69,22 @@ ul.nav-menu li a:hover {
     background-color: rgba(109, 168, 214, 0.2); /*#5acde7;*/
     border-color: #6da8d6; /*#5acde7;*/
 }
+ul.nav-menu li button {
+    color: #000;
+    text-decoration: none;
+    background-color: transparent;
+    border: 1px solid #ffbe58;
+    border-radius: 20px;
+    padding: 10px 20px;
+    font-size: 100%;
+}
+
+ul.nav-menu li button:hover {
+    color: #000;
+    background-color: rgba(109, 168, 214, 0.2); /*#5acde7;*/
+    border-color: #6da8d6; /*#5acde7;*/
+    cursor: pointer;
+}
 ul.nav-menu.mobile {
     display: block;
     width: 100%;
@@ -97,6 +113,18 @@ ul.nav-menu.mobile li a {
     
 }
 ul.nav-menu.mobile li a:hover {
+    background-color: rgba(109, 168, 214, 0.2);
+    border-bottom-color: rgba(109, 168, 214, 1)
+}
+ul.nav-menu.mobile li button {
+    border: none;
+    border-radius: 0;
+    background-color: rgba(255, 239, 98, 1);
+    border-bottom: 1px solid #fff;
+    width: 100%;
+    text-align: left;
+}
+ul.nav-menu.mobile li button:hover {
     background-color: rgba(109, 168, 214, 0.2);
     border-bottom-color: rgba(109, 168, 214, 1)
 }

@@ -10,6 +10,7 @@ export class MainMenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
+    //$('button').click(function(){alert('h');});
   }
 
 }
