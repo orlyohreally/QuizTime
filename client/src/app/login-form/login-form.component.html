@@ -1,14 +1,15 @@
-<form id = "popup-form" class = "modal fade">
+{{diagnostic}}
+<form id = "popup-form" #loginForm="ngForm" class = "modal fade">
     <h1>Login</h1>
     <div class = "form-input-holder">
         <label for = "login">Login</label>
-        <input id = "login" type = "text" placeholder = "Username or email"/>
+        <input name = "login" id = "login" [(ngModel)]="model.login" required type = "text" placeholder = "Username or email"/>
     </div>
     <div class = "form-input-holder">
         <label for = "password">Password</label>
-        <input id = "password" type = "password" placeholder = "Password"/>
+        <input name = "password" id = "password" [(ngModel)]="model.password" required type = "password" placeholder = "Password"/>
     </div>
     <div class = "form-button-holder">
-        <button type = "button" id = "login-btn" >Submit</button>
+        <button type = "submit" (ngSubmit)="onSubmit()" [disabled]="!loginForm.form.valid" >Submit</button>
     </div>
 </form>
