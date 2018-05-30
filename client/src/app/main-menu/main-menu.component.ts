@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import { ModalService } from '../modal.service';
+import { LoginFormComponent } from '../login-form/login-form.component';
 @Component({
   selector: 'app-main-menu',
   templateUrl: './main-menu.component.html',
@@ -7,10 +8,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MainMenuComponent implements OnInit {
 
-  constructor() { }
+  constructor(private modalService: ModalService) {}
 
   ngOnInit() {
     //$('button').click(function(){alert('h');});
   }
-
 }

@@ -12,6 +12,10 @@ import { TopicsComponent } from './topics/topics.component';
 import { TestService } from './test.service';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { LoginFormComponent } from './login-form/login-form.component';
+
+import { ModalService } from './modal.service';
+import { ModalDirective } from './modal.directive';
+import { ModalComponent } from './modal/modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -20,6 +24,11 @@ import { LoginFormComponent } from './login-form/login-form.component';
     QuizTimeDescriptionComponent,
     StepsComponent,
     TopicsComponent,
+    LoginFormComponent,
+    ModalDirective,
+    ModalComponent
+  ],
+  entryComponents:[
     LoginFormComponent
   ],
   imports: [
@@ -28,7 +37,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [TestService],
+  providers: [TestService, ModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
