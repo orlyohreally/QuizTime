@@ -9,40 +9,25 @@ import { ModalContentComponent } from '../modal-content.component';
   templateUrl: './modal.component.html',
   styleUrls: ['./modal.component.css']
 })
-export class ModalComponent implements OnInit, OnDestroy {
-  @Input() ads: ModalItem[];
-  currentAdIndex = -1;
-  @ViewChild(ModalDirective) adHost: ModalDirective;
-  interval: any;
+export class ModalComponent implements OnInit {
+  @Input() modal: ModalItem;
+  @ViewChild(ModalDirective) modalContentHost: ModalDirective;
   
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
   ngOnInit() {
     this.loadComponent();
-    this.getAds();
   }
-
-  ngOnDestroy() {
-    clearInterval(this.interval);
-  }
-
+  
   loadComponent() {
-    this.currentAdIndex = (this.currentAdIndex + 1) % this.ads.length;
-    let modalItem = this.ads[this.currentAdIndex];
-
+    let modalItem = this.modal;
     let componentFactory = this.componentFactoryResolver.resolveComponentFactory(modalItem.component);
 
-    let viewContainerRef = this.adHost.viewContainerRef;
+    let viewContainerRef = this.modalContentHost.viewContainerRef;
     viewContainerRef.clear();
 
     let componentRef = viewContainerRef.createComponent(componentFactory);
     (<ModalContentComponent>componentRef.instance).data = modalItem.data;
-  }
-
-  getAds() {
-    //this.interval = setInterval(() => {
-      this.loadComponent();
-    //}, 3000);
   }
 
 }

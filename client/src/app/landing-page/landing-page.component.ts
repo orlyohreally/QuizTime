@@ -10,11 +10,17 @@ import { ModalItem }            from '../modal-item';
 })
 export class LandingPageComponent implements OnInit {
   
-  ads: ModalItem[];
+  modal: ModalItem;
   constructor(private modalService: ModalService) { }
   
   ngOnInit() {
-    this.ads = this.modalService.getAds();
+    
+  }
+  LoadLoginForm() {
+    this.modal = this.modalService.getLoginFormModal();
+  }
+  getStepsModal() {
+    this.modal = this.modalService.getStepsModal();
   }
 
 }

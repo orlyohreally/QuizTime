@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalService } from '../modal.service';
 import { LoginFormComponent } from '../login-form/login-form.component';
+
+import { LandingPageComponent } from '../landing-page/landing-page.component';
+
 @Component({
   selector: 'app-main-menu',
   templateUrl: './main-menu.component.html',
@@ -8,9 +11,12 @@ import { LoginFormComponent } from '../login-form/login-form.component';
 })
 export class MainMenuComponent implements OnInit {
 
-  constructor(private modalService: ModalService) {}
+  constructor(private modalService: ModalService, private landingPageComponent: LandingPageComponent) {}
 
   ngOnInit() {
-    //$('button').click(function(){alert('h');});
+    this.landingPageComponent.getStepsModal();
+  }
+  ShowLoginForm() {
+    this.landingPageComponent.LoadLoginForm();
   }
 }
