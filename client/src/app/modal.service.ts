@@ -7,9 +7,8 @@ import { ModalItem } from './modal-item';
 @Injectable()
 export class ModalService {
 
-  getLoginFormModal() {
-    return new ModalItem(LoginFormComponent,   {user: 'Hiring for several positions',
-                                        password: 'Submit your resume today!'});
+  getLoginFormModal(data) {
+    return new ModalItem(LoginFormComponent, data);
   }
   
 }

@@ -3,11 +3,11 @@
     <h1>Login</h1>
     <div class = "form-input-holder">
         <label for = "login">Login</label>
-        <input name = "login" id = "login" [(ngModel)]="model.login" required type = "text" placeholder = "Username or email"/>
+        <input name = "login" id = "login" [(ngModel)]="data.login" required type = "text" placeholder = "Username or email"/>
     </div>
     <div class = "form-input-holder">
         <label for = "password">Password</label>
-        <input name = "password" id = "password" [(ngModel)]="model.password" required type = "password" placeholder = "Password"/>
+        <input name = "password" id = "password" [(ngModel)]="data.password" required type = "password" placeholder = "Password"/>
     </div>
     <div class = "form-button-holder">
         <button type = "submit" (ngSubmit)="onSubmit()" [disabled]="!loginForm.form.valid" >Submit</button>

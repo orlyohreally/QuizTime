@@ -1,8 +1,8 @@
-<div class = "dark-background hide">
+<div class = "dark-background" [ngStyle]="{'display':modal.component!=null?'block':'none'}">
     <div class = "modal modal-large">
         <ng-template modal-content-host></ng-template>
-        <div class = "modal-close">
-            <span class = "fa fa-close"></span>
+        <div class = "modal-close" (click)="Close()">
+            <span class = "fa fa-close"  ></span>
         </div>
     </div>
 </div>

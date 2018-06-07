@@ -8,13 +8,13 @@ import { User } from '../user';
 export class LoginFormComponent implements OnInit {
   @Input() data: any;
   
-  model = new User('token1212', 'login1221', 'passwo212fcrd');
+  //model = new User('token1212', 'login1221', 'passwo212fcrd');
   submitted = false;
   onSubmit() { this.submitted = true; console.log('submitted!');}
   
   //remove
   get diagnostic() {
-    return JSON.stringify(this.model);
+    return JSON.stringify(this.data);
   }
   
   constructor() { }

@@ -1,7 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { ModalService }         from '../modal.service';
 import { ModalItem }            from '../modal-item';
+import { StepsComponent } from '../steps/steps.component';
+import { ModalComponent } from '../modal/modal.component';
+
+import { LoginFormComponent } from '../login-form/login-form.component';
 
 @Component({
   selector: 'app-landing-page',
@@ -9,18 +13,25 @@ import { ModalItem }            from '../modal-item';
   styleUrls: ['./landing-page.component.css']
 })
 export class LandingPageComponent implements OnInit {
-  
   modal: ModalItem;
   constructor(private modalService: ModalService) { }
   
   ngOnInit() {
+    console.log('hey');
+    this.modal = new ModalItem(null, {});
+    //this.modalComponent.modal = new ModalItem(LoginFormComponent, {login:"ddvdv"});
+    //this.modalComponent.active = false;
     
+    
+    //this.modal = new ModalItem(LoginFormComponent, {login:"init"});
   }
-  LoadLoginForm() {
-    this.modal = this.modalService.getLoginFormModal();
+  
+  LoadLoginForm(data) {
+    this.modal = new ModalItem(LoginFormComponent, {login:"onclick"});
   }
-  getStepsModal() {
-    this.modal = this.modalService.getStepsModal();
+  CloseLoginForm() {
+    this.modal = new ModalItem(null, {});
   }
+  
 
 }
