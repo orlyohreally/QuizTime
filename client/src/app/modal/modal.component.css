@@ -9,9 +9,6 @@
     z-index: 100;
     overflow: auto;
 }
-.hide {
-    display: none;
-}
 div.modal {
     background: #fff;
     /*height: 50%;*/

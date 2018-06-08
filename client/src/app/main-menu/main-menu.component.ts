@@ -14,13 +14,11 @@ export class MainMenuComponent implements OnInit {
 
   constructor(private modalService: ModalService, private landingPageComponent: LandingPageComponent) {}
 
-  ngOnInit() {
-    //this.landingPageComponent.LoadLoginForm({token:'dfvd', login:'onload', password: 'passwo212fcrd'});
+  ngOnInit() { }
+  ShowLoginForm() {
+    this.landingPageComponent.LoadComponentModal(LoginFormComponent);
   }
-  ShowLoginForm() {console.log('show');
-    this.landingPageComponent.LoadLoginForm({token:'dfvd', login:'onload', password: 'passwo212fcrd'});
-  }
-  CloseLoginForm() {console.log('close');
-    this.landingPageComponent.CloseLoginForm();
+  CloseLoginForm() {
+    this.landingPageComponent.CloseComponentModal();
   }
 }

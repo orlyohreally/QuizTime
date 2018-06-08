@@ -14,16 +14,16 @@ export class ModalComponent implements OnInit {
   @ViewChild(ModalDirective) modalContentHost: ModalDirective;
   constructor(private componentFactoryResolver: ComponentFactoryResolver) { }
 
-  ngOnInit() {console.log('loading');
+  ngOnInit() {
     this.loadComponent();
   }
   ngOnChanges(changes:SimpleChanges) {
     this.loadComponent();
   }
-  Close() {console.log('close');
+  Close() {
     this.modal = new ModalItem(null, {});
   }
-  loadComponent() {console.log(this.modal.component);
+  loadComponent() {
     if(this.modal && this.modal.component) {
         let modalItem = this.modal;
         let componentFactory = this.componentFactoryResolver.resolveComponentFactory(modalItem.component);

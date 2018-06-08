@@ -1,5 +1,4 @@
-{{diagnostic}}
-<form id = "popup-form" #loginForm="ngForm" class = "modal">
+<form id = "login-form" #loginForm="ngForm" class = "modal"  [ngClass]="{'hidden':type!='login'}">
     <h1>Login</h1>
     <div class = "form-input-holder">
         <label for = "login">Login</label>
@@ -10,6 +9,57 @@
         <input name = "password" id = "password" [(ngModel)]="data.password" required type = "password" placeholder = "Password"/>
     </div>
     <div class = "form-button-holder">
-        <button type = "submit" (ngSubmit)="onSubmit()" [disabled]="!loginForm.form.valid" >Submit</button>
+        <button type = "submit" (ngSubmit)="login()" [disabled]="!loginForm.form.valid" >Login</button>
+    </div>
+    <div class = "form-link-holder pull-left">
+        <span (click)="showForgotPasswordForm()" >Forgot password?</span>
+    </div>
+    <div class = "form-link-holder pull-right">
+        <span (click)="showRegisterForm()">Not registered yet?</span>
+    </div>
+</form>
+
+<form id = "signin-form" #signinForm="ngForm" class = "modal" [ngClass]="{'hidden':type!='signin'}">
+    <h1>Sign up</h1>
+    <div class = "form-input-holder">
+        <label for = "login">Username</label>
+        <input name = "login" id = "login" [(ngModel)]="data.login" required type = "text" placeholder = "Username"/>
+    </div>
+    <div class = "form-input-holder">
+        <label for = "email">Email</label>
+        <input name = "email" id = "email" [(ngModel)]="data.email" required type = "email" placeholder = "Email"/>
+    </div>
+    <div class = "form-input-holder">
+        <label for = "password">Password</label>
+        <input name = "password" id = "password" [(ngModel)]="data.password" required type = "password" placeholder = "Password"/>
+    </div>
+    <div class = "form-input-holder">
+        <label for = "password">Password again</label>
+        <input name = "password" id = "password" [(ngModel)]="data.password2" required type = "password" placeholder = "Password"/>
+    </div>
+    <div class = "form-input-holder">
+        <label for = "agreement" class = "small">
+            <input name = "agreement" id = "agreement" [(ngModel)]="data.agreement" required type = "checkbox"/>
+            <a [routerLink]="">I agree to our terms of service and privacy policy</a>
+        </label>
+    </div>
+    <div class = "form-button-holder">
+        <button type = "submit" (ngSubmit)="signin()" [disabled]="!signinForm.form.valid" >Sign up</button>
+    </div>
+    <div class = "form-link-holder pull-right">
+        <span (click)="showLoginForm()">Already have an account?</span>
+    </div>
+</form>
+<form id = "forgot-form" #forgotPasswordForm="ngForm" class = "modal" [ngClass]="{'hidden':type!='forgot_password'}">
+    <h1>Reset password</h1>
+    <div class = "form-input-holder">
+        <label for = "email">Email</label>
+        <input name = "email" id = "email" [(ngModel)]="data.email" required type = "email" placeholder = "Email"/>
+    </div>
+    <div class = "form-button-holder">
+        <button type = "submit" (ngSubmit)="signin()" [disabled]="!forgotPasswordForm.form.valid" >Send instructions</button>
+    </div>
+    <div class = "form-link-holder pull-right">
+        <span (click)="showLoginForm()">Log in?</span>
     </div>
 </form>
