@@ -26,12 +26,13 @@ form input[type="text"], form input[type="password"], form input[type="email"] {
     border-width: 1px;
     border-radius: 50px;
     width: calc(100% - 40px);
+    border-color: #ffbe58;
 }
 form input[type="checkbox"] {
     margin-right: 10px;
 }
-form input.ng-invalid:focus, form input.ng-valid:focus {
-   border-color: #659dd0;
+form input:focus, form input:focus {
+   border-color: #659dd0!important;
 }
 form .form-input-holder label {
     display: block;
@@ -83,9 +84,9 @@ form input.ng-invalid:not(form) {
    border-color: #a94442;
 }
 form input.ng-invalid.ng-untouched, form input.ng-valid.ng-untouched {
-   border-color: #ffbe58;;
+   border-color: #ffbe58;
 }
-span.alert.alert-danger {
+.alert.alert-danger {
     padding: 10px 20px;
     font-size: 90%;
     color: #a94442;

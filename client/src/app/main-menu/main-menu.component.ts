@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ModalService } from '../modal.service';
 import { LoginFormComponent } from '../login-form/login-form.component';
 
-import { LandingPageComponent } from '../landing-page/landing-page.component';
+//import { LandingPageComponent } from '../landing-page/landing-page.component';
+import { AppComponent } from '../app.component';
 
 
 @Component({
@@ -12,13 +13,13 @@ import { LandingPageComponent } from '../landing-page/landing-page.component';
 })
 export class MainMenuComponent implements OnInit {
 
-  constructor(private modalService: ModalService, private landingPageComponent: LandingPageComponent) {}
+  constructor(private modalService: ModalService, private appComponent: AppComponent) {}
 
   ngOnInit() { }
   ShowLoginForm() {
-    this.landingPageComponent.LoadComponentModal(LoginFormComponent);
+    this.appComponent.LoadComponentModal(LoginFormComponent);
   }
   CloseLoginForm() {
-    this.landingPageComponent.CloseComponentModal();
+    this.appComponent.CloseComponentModal();
   }
 }
