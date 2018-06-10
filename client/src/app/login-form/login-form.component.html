@@ -1,15 +1,17 @@
-<form id = "login-form" #loginForm="ngForm" class = "modal"  [ngClass]="{'hidden':type!='login'}">
+<form id = "login-form" #loginForm="ngForm" (ngSubmit)="login()" class = "modal" *ngIf="type=='login'">
     <h1>Login</h1>
     <div class = "form-input-holder">
         <label for = "login">Login</label>
-        <input name = "login" id = "login" [(ngModel)]="data.login" required type = "text" placeholder = "Username or email"/>
+        <input name = "login" id = "login" #login="ngModel" [(ngModel)]="data.login" required type = "text" placeholder = "Username or email"/>
+        <span class = "alert alert-danger" [hidden]="login.valid || login.pristine">Login is required</span>
     </div>
     <div class = "form-input-holder">
         <label for = "password">Password</label>
-        <input name = "password" id = "password" [(ngModel)]="data.password" required type = "password" placeholder = "Password"/>
+        <input name = "password" id = "password"  #password="ngModel" [(ngModel)]="data.password" required type = "password" placeholder = "Password"/>
+        <span class = "alert alert-danger" [hidden]="password.valid || password.pristine">Password is required</span>
     </div>
     <div class = "form-button-holder">
-        <button type = "submit" (ngSubmit)="login()" [disabled]="!loginForm.form.valid" >Login</button>
+        <button type = "submit"  [disabled]="!loginForm.form.valid" >Login</button>
     </div>
     <div class = "form-link-holder pull-left">
         <span (click)="showForgotPasswordForm()" >Forgot password?</span>
@@ -19,45 +21,51 @@
     </div>
 </form>
 
-<form id = "signin-form" #signinForm="ngForm" class = "modal" [ngClass]="{'hidden':type!='signin'}">
+<form id = "signin-form" (ngSubmit)="signin()" #signinForm="ngForm" class = "modal" *ngIf="type=='signin'">
     <h1>Sign up</h1>
     <div class = "form-input-holder">
         <label for = "login">Username</label>
-        <input name = "login" id = "login" [(ngModel)]="data.login" required type = "text" placeholder = "Username"/>
+        <input name = "login" id = "login" #login="ngModel" [(ngModel)]="data.login" required type = "text" placeholder = "Username or email"/>
+        <span class = "alert alert-danger" [hidden]="login.valid || login.pristine">Username is required</span>
     </div>
     <div class = "form-input-holder">
         <label for = "email">Email</label>
-        <input name = "email" id = "email" [(ngModel)]="data.email" required type = "email" placeholder = "Email"/>
+        <input name = "email" id = "email" #email="ngModel" [(ngModel)]="data.email" required type = "email" placeholder = "Email"/>
+        <span class = "alert alert-danger" [hidden]="email.valid || email.pristine">Email is required</span>
     </div>
     <div class = "form-input-holder">
         <label for = "password">Password</label>
-        <input name = "password" id = "password" [(ngModel)]="data.password" required type = "password" placeholder = "Password"/>
+        <input name = "password" id = "password" #password="ngModel" [(ngModel)]="data.password" required type = "password" placeholder = "Password"/>
+        <span class = "alert alert-danger" [hidden]="password.valid || password.pristine">Password is required</span>
     </div>
     <div class = "form-input-holder">
-        <label for = "password">Password again</label>
-        <input name = "password" id = "password" [(ngModel)]="data.password2" required type = "password" placeholder = "Password"/>
+        <label for = "password">Password again for verification</label>
+        <input name = "password" id = "password" #password="ngModel" [(ngModel)]="data.password" required type = "password" placeholder = "Password"/>
+        <span class = "alert alert-danger" [hidden]="password.valid || password.pristine">Password verification is required</span>
     </div>
     <div class = "form-input-holder">
         <label for = "agreement" class = "small">
-            <input name = "agreement" id = "agreement" [(ngModel)]="data.agreement" required type = "checkbox"/>
+            <input name = "agreement" #agreement = "ngModel" id = "agreement" [(ngModel)]="data.agreement" required type = "checkbox"/>
             <a [routerLink]="">I agree to our terms of service and privacy policy</a>
+            <span class = "alert alert-danger" [hidden]="agreement.valid || agreement.pristine">Agreement is required</span>
         </label>
     </div>
     <div class = "form-button-holder">
-        <button type = "submit" (ngSubmit)="signin()" [disabled]="!signinForm.form.valid" >Sign up</button>
+        <button type = "submit" [disabled]="!signinForm.form.valid" >Sign up</button>
     </div>
     <div class = "form-link-holder pull-right">
         <span (click)="showLoginForm()">Already have an account?</span>
     </div>
 </form>
-<form id = "forgot-form" #forgotPasswordForm="ngForm" class = "modal" [ngClass]="{'hidden':type!='forgot_password'}">
+<form id = "forgot-form" (ngSubmit)="showForgotPasswordForm()"  #forgotPasswordForm="ngForm" class = "modal" *ngIf="type=='forgot_password'">
     <h1>Reset password</h1>
     <div class = "form-input-holder">
         <label for = "email">Email</label>
-        <input name = "email" id = "email" [(ngModel)]="data.email" required type = "email" placeholder = "Email"/>
+        <input name = "email" id = "email" #email="ngModel" [(ngModel)]="data.email" required type = "email" placeholder = "Email"/>
+        <span class = "alert alert-danger" [hidden]="email.valid || email.pristine">Email is required</span>
     </div>
     <div class = "form-button-holder">
-        <button type = "submit" (ngSubmit)="signin()" [disabled]="!forgotPasswordForm.form.valid" >Send instructions</button>
+        <button type = "submit" [disabled]="!forgotPasswordForm.form.valid" >Send instructions</button>
     </div>
     <div class = "form-link-holder pull-right">
         <span (click)="showLoginForm()">Log in?</span>

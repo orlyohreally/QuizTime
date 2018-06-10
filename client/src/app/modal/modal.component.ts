@@ -21,7 +21,7 @@ export class ModalComponent implements OnInit {
     this.loadComponent();
   }
   Close() {
-    this.modal = new ModalItem(null, {});
+    this.modal = new ModalItem(null);
   }
   loadComponent() {
     if(this.modal && this.modal.component) {

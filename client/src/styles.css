@@ -22,14 +22,15 @@ form .form-input-holder {
 }
 form input[type="text"], form input[type="password"], form input[type="email"] {
     padding: 10px 20px;
-    border: 1px solid #ffbe58;
+    border-style: solid;
+    border-width: 1px;
     border-radius: 50px;
     width: calc(100% - 40px);
 }
 form input[type="checkbox"] {
     margin-right: 10px;
 }
-form input:focus {
+form input.ng-invalid:focus, form input.ng-valid:focus {
    border-color: #659dd0;
 }
 form .form-input-holder label {
@@ -73,4 +74,19 @@ form .form-link-holder span:hover {
 }
 form label.small {
     font-size: 80%;
+}
+
+form input.ng-valid[required], form input.ng-valid.required {
+   border-color: #42A948;
+}
+form input.ng-invalid:not(form) {
+   border-color: #a94442;
+}
+form input.ng-invalid.ng-untouched, form input.ng-valid.ng-untouched {
+   border-color: #ffbe58;;
+}
+span.alert.alert-danger {
+    padding: 10px 20px;
+    font-size: 90%;
+    color: #a94442;
 }

@@ -14,14 +14,14 @@ export class LandingPageComponent implements OnInit {
   constructor() { }
   
   ngOnInit() {
-    this.modal = new ModalItem(null, {});
+    this.modal = new ModalItem(null);
   }
-  LoadComponentModal(component, data = {}) {
-    this.modal = new ModalItem(component, data);
+  LoadComponentModal(component) {
+    this.modal = new ModalItem(component);
   }
   
   CloseComponentModal() {
-    this.modal = new ModalItem(null, {});
+    this.modal = new ModalItem(null);
   }
   
 }

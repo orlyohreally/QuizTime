@@ -10,15 +10,10 @@ export class LoginFormComponent implements OnInit {
   @Input() data: any;
   type: string;
   submitted = false;
-  login() { 
-    this.submitted = true; console.log('login submitted!');
-  }
-  signin() { 
-    this.submitted = true; console.log('signin submitted!');
-  }  
+  
   constructor() { }
 
-  ngOnInit() { 
+  ngOnInit() {
     this.type = 'login';
   }
   showRegisterForm() {
@@ -30,4 +25,10 @@ export class LoginFormComponent implements OnInit {
   showForgotPasswordForm() {
     this.type = 'forgot_password';
   }
+  login() { 
+    this.submitted = true; console.log('login submitted!');
+  }
+  signin() { 
+    this.submitted = true; console.log('signin submitted!');
+  }  
 }

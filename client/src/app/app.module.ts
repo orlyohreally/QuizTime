@@ -12,7 +12,6 @@ import { TopicsComponent } from './topics/topics.component';
 import { TestService } from './test.service';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { LoginFormComponent } from './login-form/login-form.component';
-import { SigninFormComponent } from './signin-form/signin-form.component';
 
 import { ModalService } from './modal.service';
 import { ModalDirective } from './modal.directive';
