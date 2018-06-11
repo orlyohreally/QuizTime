@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { User } from '../user';
+import { multiPatternValidator } from '../shared/forbidden-name.directive';
 
 @Component({
     selector: 'app-login-form',
@@ -16,8 +16,8 @@ export class LoginFormComponent implements OnInit {
     submitted = false;
     constructor() { }
     
-    username_pattern = "^[a-z0-9_-]{8,15}$";
-    password_pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{6,12}$";
+    username_pattern = "^[a-z0-9_-]{5,15}$";
+    password_pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,12}$";
     email_pattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
 
     ngOnInit() {
@@ -26,15 +26,18 @@ export class LoginFormComponent implements OnInit {
         this.loginForm = new FormGroup({
             'login_login': new FormControl(this.data.login, [
                 Validators.required,
-                Validators.pattern(this.email_pattern) || Validators.pattern(this.username_pattern),
+                multiPatternValidator([this.username_pattern, this.email_pattern])
             ]),
-            'login_password': new FormControl(this.data.password, Validators.required),
+            'login_password': new FormControl(this.data.password, [
+                Validators.required,
+                Validators.minLength(8),
+                Validators.pattern(this.password_pattern),
+            ])
         });
         
         this.signinForm = new FormGroup({
             'signin_login': new FormControl(this.data.login, [
                 Validators.required,
-                Validators.minLength(5),
                 Validators.pattern(this.username_pattern),
             ]),
             'signin_password': new FormControl(this.data.password, [
@@ -44,7 +47,6 @@ export class LoginFormComponent implements OnInit {
             ]),
             'signin_password_ver': new FormControl(this.data.password, [
                 Validators.required,
-                Validators.minLength(8),
                 Validators.pattern(this.password_pattern),
             ]),
             'signin_email': new FormControl(this.data.email, [

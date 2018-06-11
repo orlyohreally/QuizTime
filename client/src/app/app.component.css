@@ -6,6 +6,3 @@
 	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: #fff;
 }
-:host < .modal{
-    overflow: hidden;
-}

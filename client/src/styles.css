@@ -39,6 +39,11 @@ form .form-input-holder label {
     margin-bottom: 10px;
     font-weight: 600;
 }
+form .form-input-holder.required label:after {
+    content: '*';
+    margin-left: 2px;
+    color: #42A948;
+}
 @media (max-width: 768px) {
     form .form-input-holder {
         text-align: left;
