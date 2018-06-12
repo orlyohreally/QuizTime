@@ -39,11 +39,27 @@ INSTALLED_APPS = [
     'rest_framework',
 	'tests',
     'corsheaders',
+    #'rest_framework.authtoken'
 ]
 
 REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 10
+    'PAGE_SIZE': 10,
+    
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    # 'DEFAULT_AUTHENTICATION_CLASSES': (
+        # 'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        # 'tests.backends.JWTAuthentication',
+        # 'rest_framework.authentication.SessionAuthentication',
+        # 'rest_framework.authentication.BasicAuthentication',
+    # ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+       'tests.backends.JWTAuthentication',
+    ),
+    'EXCEPTION_HANDLER': 'tests.exceptions.core_exception_handler',
+    'NON_FIELD_ERRORS_KEY': 'error',
 }
 
 MIDDLEWARE = [
@@ -109,6 +125,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'tests.User'
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
