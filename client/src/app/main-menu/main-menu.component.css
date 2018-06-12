@@ -85,14 +85,14 @@ ul.nav-menu li button:hover {
     border-color: #6da8d6; /*#5acde7;*/
     cursor: pointer;
 }
-ul.nav-menu.mobile {
+ul.nav-menu.collapsed {
     display: block;
     width: 100%;
     margin: 0;
     position: absolute;
     padding: 0;
 }
-ul.nav-menu.mobile li {
+ul.nav-menu.collapsed li {
     display: block;
     width: 100%;
     background-color: #fff;
@@ -100,11 +100,11 @@ ul.nav-menu.mobile li {
     padding: 0;
     /*text-align: right;*/
 }
-ul.nav-menu.mobile li:first-child {
+ul.nav-menu.collapsed li:first-child {
     border-top: 1px solid #fff;
 }
 
-ul.nav-menu.mobile li a {
+ul.nav-menu.collapsed li a {
     border: none;
     border-radius: 0;
     display: block;
@@ -112,11 +112,11 @@ ul.nav-menu.mobile li a {
     border-bottom: 1px solid #fff;
     
 }
-ul.nav-menu.mobile li a:hover {
+ul.nav-menu.collapsed li a:hover {
     background-color: rgba(109, 168, 214, 0.2);
     border-bottom-color: rgba(109, 168, 214, 1)
 }
-ul.nav-menu.mobile li button {
+ul.nav-menu.collapsed li button {
     border: none;
     border-radius: 0;
     background-color: rgba(255, 239, 98, 1);
@@ -124,7 +124,7 @@ ul.nav-menu.mobile li button {
     width: 100%;
     text-align: left;
 }
-ul.nav-menu.mobile li button:hover {
+ul.nav-menu.collapsed li button:hover {
     background-color: rgba(109, 168, 214, 0.2);
     border-bottom-color: rgba(109, 168, 214, 1)
 }

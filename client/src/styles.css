@@ -97,3 +97,22 @@ form input.ng-invalid.ng-untouched, form input.ng-valid.ng-untouched {
     font-size: 90%;
     color: #a94442;
 }
+.left-center {
+    float: left;
+    text-align: left;
+}
+.right-center {
+    float: right;
+    text-align: left;
+}
+
+@media (max-width: 768px) {
+    .left-center {
+        float: none;
+        text-align: center;
+    }
+    .right-center {
+        float: none;
+        text-align: center;
+    }
+}
