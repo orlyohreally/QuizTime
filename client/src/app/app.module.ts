@@ -16,6 +16,7 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { ModalService } from './modal.service';
 import { ModalDirective } from './modal.directive';
 import { ModalComponent } from './modal/modal.component';
+import { SearchQuizePageComponent } from './search-quize-page/search-quize-page.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +27,8 @@ import { ModalComponent } from './modal/modal.component';
     TopicsComponent,
     ModalDirective,
     ModalComponent,
-    LoginFormComponent
+    LoginFormComponent,
+    SearchQuizePageComponent
   ],
   entryComponents:[
     LoginFormComponent

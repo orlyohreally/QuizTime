@@ -2,11 +2,10 @@ import { Directive, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { AbstractControl, NG_VALIDATORS, Validator, ValidatorFn, Validators } from '@angular/forms';
 
 
-export function multiPatternValidator(patterns: string[]): ValidatorFn {
+export function multiPatternValidator(patterns: RegExp[]): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} | null => {
     
-    for(let pattern_str of patterns) {
-        const pattern = new RegExp(pattern_str, 'i')
+    for(let pattern of patterns) {
         const valid = pattern.test(control.value);
         if(valid)
             return null;
@@ -16,11 +15,11 @@ export function multiPatternValidator(patterns: string[]): ValidatorFn {
 }
 
 @Directive({
-    selector: '[appForbiddenName]',
-    providers: [{provide: NG_VALIDATORS, useExisting: ForbiddenValidatorDirective, multi: true}]
+    selector: '[appLoginValidation]',
+    providers: [{provide: NG_VALIDATORS, useExisting: LoginValidatorDirective, multi: true}]
 })
-export class ForbiddenValidatorDirective implements Validator {
-    @Input('appForbiddenName') multiPattern: string[];
+export class LoginValidatorDirective implements Validator {
+    @Input('appLoginValidation') multiPattern: RegExp[];
 
     validate(control: AbstractControl): {[key: string]: any} | null {
     return this.multiPattern ? multiPatternValidator(this.multiPattern)(control)

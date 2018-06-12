@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { multiPatternValidator } from '../shared/forbidden-name.directive';
+import { multiPatternValidator } from '../validation/login-validation.directive';
+import { matchValidator } from '../validation/match-validation.directive';
 
 @Component({
     selector: 'app-login-form',
@@ -16,42 +17,41 @@ export class LoginFormComponent implements OnInit {
     submitted = false;
     constructor() { }
     
-    username_pattern = "^[a-z0-9_-]{5,15}$";
-    password_pattern = "^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,12}$";
-    email_pattern = "^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$";
-
+    username_regex = /^[a-z0-9_-]{5,15}$/;
+    email_regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
+    password_regex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s).{8,}$/;
+    
     ngOnInit() {
         this.type = 'login';
         
         this.loginForm = new FormGroup({
             'login_login': new FormControl(this.data.login, [
                 Validators.required,
-                multiPatternValidator([this.username_pattern, this.email_pattern])
+                multiPatternValidator([this.username_regex, this.email_regex])
             ]),
             'login_password': new FormControl(this.data.password, [
                 Validators.required,
-                Validators.minLength(8),
-                Validators.pattern(this.password_pattern),
+                Validators.pattern(this.password_regex),
             ])
         });
         
         this.signinForm = new FormGroup({
             'signin_login': new FormControl(this.data.login, [
                 Validators.required,
-                Validators.pattern(this.username_pattern),
+                Validators.pattern(this.username_regex),
             ]),
             'signin_password': new FormControl(this.data.password, [
                 Validators.required,
-                Validators.minLength(8),
-                Validators.pattern(this.password_pattern),
+                Validators.pattern(this.password_regex),
             ]),
             'signin_password_ver': new FormControl(this.data.password, [
                 Validators.required,
-                Validators.pattern(this.password_pattern),
+                Validators.pattern(this.password_regex),
+                matchValidator('signin_password')
             ]),
             'signin_email': new FormControl(this.data.email, [
                 Validators.required,
-                Validators.pattern(this.email_pattern),
+                Validators.pattern(this.email_regex),
             ]),
             'signin_agreement': new FormControl(this.data.agreement, [
                 Validators.required,
@@ -61,7 +61,7 @@ export class LoginFormComponent implements OnInit {
         this.forgot_passwordForm = new FormGroup({
             'forgot_password_email': new FormControl(this.data.email, [
                 Validators.required,
-                Validators.pattern(this.email_pattern),
+                Validators.pattern(this.email_regex),
             ]),
         });
     }
@@ -123,31 +123,4 @@ export class LoginFormComponent implements OnInit {
         }
             
     }
-    /*submit_login() {
-        if(this.loginForm.valid) {
-            this.submitted = true;
-            console.log('login submitted!');
-        }
-        else {
-            this.validateForm(this.loginForm);
-        }
-    }
-    submit_signin() { 
-        if(this.signinForm.valid) {
-            this.submitted = true;
-            console.log('signin submitted!');
-        }
-        else {
-            this.validateForm(this.signinForm);
-        }
-    }  
-    submit_forgot_password() { 
-        if(this.forgot_passwordForm.valid) {
-            this.submitted = true;
-            console.log('forgot_password submitted!');
-        }
-        else {
-            this.validateForm(this.forgot_passwordForm);
-        }
-    }*/
 }

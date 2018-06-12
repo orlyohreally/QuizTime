@@ -42,7 +42,8 @@ form .form-input-holder label {
 form .form-input-holder.required label:after {
     content: '*';
     margin-left: 2px;
-    color: #42A948;
+    color: #a94442;
+    font-size: 110%;
 }
 @media (max-width: 768px) {
     form .form-input-holder {

@@ -8,12 +8,12 @@
             <span *ngIf="login_login.errors.multiPattern">Invalid login</span>
         </div>
     </div>
-    <div class = "form-input-holder">
+    <div class = "form-input-holder required">
         <label for = "password">Password</label>
         <input id = "password" class="form-control" formControlName="login_password" required  type = "password" placeholder = "Password"/>
         <div class = "alert alert-danger" *ngIf="login_password.invalid && (login_password.dirty || login_password.touched)">
             <span *ngIf="login_password.errors.required" >Password is required</span>
-            <span *ngIf="login_password.errors.minlength" >Invalid password</span>
+            <span *ngIf="login_password.errors.pattern" >Invalid password</span>
         </div>
     </div>
     <div class = "form-button-holder">
@@ -29,7 +29,7 @@
 
 <form [formGroup]="signinForm" #sForm="ngForm" class = "modal" *ngIf="type=='signin'">
     <h1>Sign up</h1>
-    <div class = "form-input-holder">
+    <div class = "form-input-holder required">
         <label for = "login">Username</label>
         <input id="login" class="form-control" formControlName="signin_login" required type = "text" placeholder = "Username or email"/>
         <div class = "alert alert-danger" *ngIf="signin_login.invalid && (signin_login.dirty || signin_login.touched)">
@@ -37,7 +37,7 @@
             <span *ngIf="signin_login.errors.pattern" >Invalid username</span>
         </div>
     </div>
-    <div class = "form-input-holder">
+    <div class = "form-input-holder required">
         <label for = "email">Email</label>
         <input id = "email" class="form-control" formControlName="signin_email" required  type = "email" placeholder = "Email"/>
         <div class = "alert alert-danger" *ngIf="signin_email.invalid && (signin_email.dirty || signin_email.touched)">
@@ -45,20 +45,21 @@
             <span *ngIf="signin_email.errors.pattern" >Invalid email</span>
         </div>
     </div>
-    <div class = "form-input-holder">
+    <div class = "form-input-holder required">
         <label for = "password">Password</label>
         <input id = "password" class="form-control" formControlName="signin_password" required  type = "password" placeholder = "Password"/>
         <div class = "alert alert-danger" *ngIf="signin_password.invalid && (signin_password.dirty || signin_password.touched)">
             <span *ngIf="signin_password.errors.required" >Password is required</span>
-            <span *ngIf="signin_password.errors.pattern" >Invalid password</span>
+            <span *ngIf="signin_password.errors.pattern" >Invalid password (1 capital letter, 1 lowercase letter, 1 number and at least 8 characters in total</span>
         </div>
     </div>
-    <div class = "form-input-holder">
+    <div class = "form-input-holder required">
         <label for = "password_ver">Password for verification</label>
         <input id = "password_ver" class="form-control"  formControlName="signin_password_ver" required  type = "password" placeholder = "Password for verification"/>
         <div class = "alert alert-danger" *ngIf="signin_password_ver.invalid && (signin_password_ver.dirty || signin_password_ver.touched)">
             <span *ngIf="signin_password_ver.errors.required" >Password verification is required</span>
-            <span *ngIf="signin_password_ver.errors.pattern" >Invalid password</span>
+            <span *ngIf="signin_password_ver.errors.pattern" >Invalid password (1 capital letter, 1 lowercase letter, 1 number and at least 8 characters in total</span>
+            <span *ngIf="!signin_password_ver.errors.pattern && signin_password_ver.errors.match" >Passwords do not match</span>
         </div>
     </div>
     <div class = "form-input-holder">
