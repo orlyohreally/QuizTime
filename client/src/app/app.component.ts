@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-//import * as $ from 'jquery';
+import * as $ from 'jquery';
+//import Tagify from 'jQuery.tagify';
 
 import { ModalItem } from './modal-item';
 import { ModalComponent } from './modal/modal.component';

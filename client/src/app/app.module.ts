@@ -16,7 +16,12 @@ import { LoginFormComponent } from './login-form/login-form.component';
 import { ModalService } from './modal.service';
 import { ModalDirective } from './modal.directive';
 import { ModalComponent } from './modal/modal.component';
-import { SearchQuizePageComponent } from './search-quize-page/search-quize-page.component';
+import { SearchQuizPageComponent } from './search-quiz-page/search-quiz-page.component';
+
+import { MessagesComponent } from './messages/messages.component';
+import { MessageService } from './message.service';
+import { FooterComponent } from './footer/footer.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +33,9 @@ import { SearchQuizePageComponent } from './search-quize-page/search-quize-page.
     ModalDirective,
     ModalComponent,
     LoginFormComponent,
-    SearchQuizePageComponent
+    SearchQuizPageComponent,
+    MessagesComponent,
+    FooterComponent,
   ],
   entryComponents:[
     LoginFormComponent
@@ -40,7 +47,7 @@ import { SearchQuizePageComponent } from './search-quize-page/search-quize-page.
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [TestService, ModalService],
+  providers: [TestService, ModalService, MessageService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

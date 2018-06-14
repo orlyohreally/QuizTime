@@ -16,6 +16,7 @@
             <span *ngIf="login_password.errors.pattern" >Invalid password</span>
         </div>
     </div>
+    <app-messages></app-messages>
     <div class = "form-button-holder">
         <button type = "button" (click)="submit_form()" >Login</button>
     </div>

@@ -23,11 +23,11 @@
             "styles": [
               "src/styles.css",
               "node_modules/font-awesome/css/font-awesome.css",
-              "src/modal/modal.css"
+              "src/plugins/Tagify/dist/tagify.css"
             ],
             "scripts": [
               "node_modules/jquery/dist/jquery.min.js",
-              "src/modal/modal.js"
+              "src/plugins/Tagify/dist/jQuery.tagify.js"
             ]
           },
           "configurations": {

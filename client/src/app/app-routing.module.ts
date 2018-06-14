@@ -3,10 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 
 
 import { LandingPageComponent }   from './landing-page/landing-page.component';
-import { MainMenuComponent }   from './main-menu/main-menu.component';
+import { SearchQuizPageComponent }   from './search-quiz-page/search-quiz-page.component';
 const routes: Routes = [
   { path: '', component: LandingPageComponent },
-  { path: 'quizzes', component: MainMenuComponent },
+  { path: 'quizzes', component: SearchQuizPageComponent },
 ];
 
 @NgModule({
