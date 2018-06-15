@@ -4,11 +4,7 @@
         <h1>Find perfect quiz for yourself</h1>
         <div id = "topics-select">
             <label for="topic-selector">Topics</label>
-            <select id="topic-selector" name="state">
-              <option value="AL">Alabama</option>
-              <option value="AL1">Alabama1</option>
-              <option value="WY">Wyoming</option>
-            </select>
+            <select2 [data]="topics" [cssImport]=true></select2>
         </div>
         <div class = "key-words-input">
             <label for="key-words">Key words</label>

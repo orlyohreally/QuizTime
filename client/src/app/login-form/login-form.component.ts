@@ -16,6 +16,7 @@ export class LoginFormComponent implements OnInit {
     forgot_passwordForm: FormGroup;
     type: string;
     submitted = false;
+    errors: string[];
     constructor(private testService: TestService) { }
     
     username_regex = /^[a-z0-9_-]{5,15}$/;
@@ -52,7 +53,7 @@ export class LoginFormComponent implements OnInit {
             ]),
             'signin_email': new FormControl(this.data.email, [
                 Validators.required,
-                Validators.pattern(this.email_regex),
+                //Validators.pattern(this.email_regex),
             ]),
             'signin_agreement': new FormControl(this.data.agreement, [
                 Validators.required,
@@ -102,26 +103,44 @@ export class LoginFormComponent implements OnInit {
     }
     submit_form() {
         var form = null;
-        var user;
+        var l_user;
         switch(this.type) {
             case 'login':
                 form = this.loginForm;
                 if(form.valid) {
-                    user = new User(this.loginForm.get('login_login').value, this.loginForm.get('login_password').value);
-                    this.testService.loginUser(user).subscribe(cur_user=>{console.log(cur_user);})
+                    l_user = new User(this.loginForm.get('login_login').value, this.loginForm.get('login_password').value);
+                    this.testService.loginUser(l_user).subscribe(
+                      user => {
+                        console.log('success', user, user.user, user.user.token);
+                        localStorage.setItem('id_toke', user.user.token);
+                      },
+                      HttpErrorResponse => {
+                        console.log(HttpErrorResponse, HttpErrorResponse.error.errors.error);
+                        this.errors = HttpErrorResponse.error.errors.error;
+                        
+                      }
+                    );
                 }
                 else 
                     this.validateForm(form);
-                console.log(user);
                 break;
             case 'signin':
                 form = this.signinForm;
                 if(form.valid) {
                     console.log(form.get('signin_login').value);
                     console.log(form.get('signin_password').value);
-                    user = new User(form.get('signin_email').value, form.get('signin_password').value, form.get('signin_login').value);
-                    console.log(user);
-                    this.testService.registerUser(user).subscribe(cur_user=>{console.log(cur_user);})
+                    l_user = new User(form.get('signin_email').value, form.get('signin_password').value, form.get('signin_login').value);
+                    console.log(l_user);
+                    this.testService.registerUser(l_user).subscribe(
+                      user => {
+                        console.log('success', user);
+                      },
+                      HttpErrorResponse => {
+                        console.log(HttpErrorResponse, HttpErrorResponse.error.errors.error);
+                        this.errors = HttpErrorResponse.error.errors.error;
+                        
+                      }
+                    );
                 }
                 else 
                     this.validateForm(form);

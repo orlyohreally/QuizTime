@@ -5,4 +5,7 @@ export class User {
     public username?: string,
     private token?: string,
   ){ }
+  get_token() {
+    return this.token;
+  }
 }

@@ -25,8 +25,11 @@
     "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.3.1",
+    "jquery.tagify": "^0.1.0",
+    "ng2-select2": "^1.0.0-beta.12",
     "rxjs": "^6.1.0",
     "rxjs-compat": "^6.1.0",
+    "select2": "^4.0.6-rc.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {

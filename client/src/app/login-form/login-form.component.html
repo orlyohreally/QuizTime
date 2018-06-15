@@ -16,7 +16,11 @@
             <span *ngIf="login_password.errors.pattern" >Invalid password</span>
         </div>
     </div>
-    <app-messages></app-messages>
+    
+    <div class = "alert alert-danger" *ngIf="errors?.length > 0">
+        <span *ngFor="let error of errors" >{{error}}</span>
+    </div>
+    
     <div class = "form-button-holder">
         <button type = "button" (click)="submit_form()" >Login</button>
     </div>
@@ -43,7 +47,7 @@
         <input id = "email" class="form-control" formControlName="signin_email" required  type = "email" placeholder = "Email"/>
         <div class = "alert alert-danger" *ngIf="signin_email.invalid && (signin_email.dirty || signin_email.touched)">
             <span *ngIf="signin_email.errors.required" >Email is required</span>
-            <span *ngIf="signin_email.errors.pattern" >Invalid email</span>
+            <!--<span *ngIf="signin_email.errors.pattern" >Invalid email</span>-->
         </div>
     </div>
     <div class = "form-input-holder required">
@@ -71,6 +75,9 @@
             <span *ngIf="signin_agreement.errors.required" >Agreement is required for registration</span>
         </div>
         </label>
+    </div>
+    <div class = "alert alert-danger" *ngIf="errors?.length > 0">
+        <span *ngFor="let error of errors" >{{error}}</span>
     </div>
     <div class = "form-button-holder">
         <button type = "button" (click)="submit_form()" >Sign up</button>

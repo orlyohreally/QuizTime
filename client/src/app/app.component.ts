@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
-//import Tagify from 'jQuery.tagify';
 
 import { ModalItem } from './modal-item';
 import { ModalComponent } from './modal/modal.component';
@@ -14,7 +13,10 @@ export class AppComponent  implements OnInit {
     title = 'app';
 
     modal: ModalItem;
-    constructor() { }
+    authenticated: boolean;
+    constructor() { 
+        this.authenticated = this.IsAuthenticated();
+    }
   
     ngOnInit() {
         this.modal = new ModalItem(null);
@@ -26,5 +28,9 @@ export class AppComponent  implements OnInit {
     CloseComponentModal() {
         this.modal = new ModalItem(null);
     }
-  
+    
+    IsAuthenticated() {
+        return localStorage.getItem('id_toke') != undefined;
+    }
+    
 }

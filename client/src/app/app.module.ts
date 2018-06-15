@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { Select2Module } from 'ng2-select2';
 
 import { AppComponent } from './app.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
@@ -18,8 +19,6 @@ import { ModalDirective } from './modal.directive';
 import { ModalComponent } from './modal/modal.component';
 import { SearchQuizPageComponent } from './search-quiz-page/search-quiz-page.component';
 
-import { MessagesComponent } from './messages/messages.component';
-import { MessageService } from './message.service';
 import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
@@ -34,7 +33,6 @@ import { FooterComponent } from './footer/footer.component';
     ModalComponent,
     LoginFormComponent,
     SearchQuizPageComponent,
-    MessagesComponent,
     FooterComponent,
   ],
   entryComponents:[
@@ -45,9 +43,11 @@ import { FooterComponent } from './footer/footer.component';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    
+    Select2Module,
   ],
-  providers: [TestService, ModalService, MessageService],
+  providers: [TestService, ModalService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
