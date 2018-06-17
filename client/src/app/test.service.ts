@@ -26,7 +26,18 @@ export class TestService {
         .pipe(
             catchError(this.handleError('getTopicsForSelect', []))
         );
-        
+    }
+    getSubjectsForSelect(): Observable<any[]> {
+        return this.http.get<any>(this.subjectSelectUrl)
+        .pipe(
+            catchError(this.handleError('getSubjectsForSelect', []))
+        );
+    }
+    getSubjectsForSelectTopic(topic_id: number): Observable<any[]> {
+        return this.http.get<any>('http://localhost:8000/api/subjects-select/' + topic_id + '/subjects_by_topic/')
+        .pipe(
+            catchError(this.handleError('getSubjectsForSelectTopic', []))
+        );
     }
     getSteps(): Observable<any> {
         return this.http.get<any>(this.stepsUrl)
@@ -62,6 +73,7 @@ export class TestService {
     private testsUrl = 'http://localhost:8000/api/quizzes/';
     private topicsUrl = 'http://localhost:8000/api/topics/';
     private topicsSelectUrl = 'http://localhost:8000/api/topics-select/';
+    private subjectSelectUrl = 'http://localhost:8000/api/subjects-select/';
     private stepsUrl = 'http://localhost:8000/api/steps/';
     private loginUserUrl = 'http://localhost:8000/api/users/login/';
     private registerUserUrl = 'http://localhost:8000/api/users/';

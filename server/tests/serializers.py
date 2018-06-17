@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from tests.models import Topic, Test, Step
+from tests.models import Topic, Test, Step, Subject, Question, Choice
 
 
 from django.contrib.auth import authenticate
@@ -139,15 +139,29 @@ class UserSerializer(serializers.ModelSerializer):
         # save the model.
         instance.save()
 
-        return instance 
-        
+        return instance
+class SubjectSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subject
+        fields = ('id', 'short_description', 'long_description')
+class ChoiceSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Choice
+        fields = ('id', 'choice_text', 'votes')
+class QuestionSerializer(serializers.ModelSerializer):
+    choices = ChoiceSerializer(many = True, read_only = True)
+    class Meta:
+        model = Question
+        fields = ('id', 'question_text', 'choices')
 class TestSerializer(serializers.ModelSerializer):
     creator = serializers.ReadOnlyField(source = 'creator.username')
     topic = serializers.ReadOnlyField(source = 'topic.name')
+    subjects = SubjectSerializer(many = True, read_only = True)
+    questions = QuestionSerializer(many = True, read_only = True)
     #name = serializers.HyperlinkedIdentityField(view_name = 'test-name', format = 'html')
     class Meta:
         model = Test
-        fields = ('id', 'url', 'name', 'pub_date', 'creator', 'topic', 'slug', 'icon', 'question_set')
+        fields = ('id', 'url', 'name', 'pub_date', 'creator', 'topic', 'slug', 'icon', 'subjects', 'questions')
         
 class TopicSerializer(serializers.HyperlinkedModelSerializer):
     creator = serializers.ReadOnlyField(source = 'creator.username')
@@ -159,6 +173,11 @@ class TopicSelectSerializer(serializers.ModelSerializer):
     text = serializers.CharField(source='name')
     class Meta:
         model = Topic
+        fields = ('id', 'text',)
+class SubjectSelectSerializer(serializers.ModelSerializer):
+    text = serializers.CharField(source='short_description')
+    class Meta:
+        model = Subject
         fields = ('id', 'text',)
     
 class StepSerializer(serializers.HyperlinkedModelSerializer):

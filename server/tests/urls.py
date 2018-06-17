@@ -10,6 +10,7 @@ router.register(r'quizzes', views.TestViewSet)
 router.register(r'topics', views.TopicViewSet)
 router.register(r'steps', views.StepViewSet)
 router.register(r'topics-select', views.TopicSelectViewSet)
+router.register(r'subjects-select', views.SubjectSelectViewSet)
 
 urlpatterns = [
     url(r'auth/', include('rest_framework.urls')),

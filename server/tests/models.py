@@ -103,7 +103,7 @@ class Test(models.Model):
     pub_date = models.DateTimeField('date published', default = timezone.now)
     creat_date = models.DateTimeField('date created', default = timezone.now)
     creator = models.ForeignKey('User', related_name = 'tests', on_delete = models.CASCADE)
-    topic = models.ForeignKey(Topic, on_delete = models.CASCADE, verbose_name = 'Тема')
+    topic = models.ForeignKey(Topic, on_delete = models.CASCADE, verbose_name = 'Тематика')
     slug = models.SlugField(unique = True)
     icon = models.FileField('test icon')
     def __str__(self):
@@ -111,15 +111,21 @@ class Test(models.Model):
     class Meta:
         ordering = ["-pub_date", "-creat_date"]
 
-        
+class Subject(models.Model):
+    test = models.ForeignKey(Test, related_name = 'subjects', on_delete = models.CASCADE, verbose_name = 'Тема')
+    short_description = models.CharField(max_length=200)
+    long_description = models.CharField(max_length=2000)
+    def __str__(self):
+        return self.short_description
+    
 class Question(models.Model):
-    test = models.ForeignKey(Test, on_delete=models.CASCADE)
+    test = models.ForeignKey(Test, on_delete=models.CASCADE, related_name = 'questions')
     question_text = models.CharField(max_length=200)
     def __str__(self):
         return self.question_text
 
 class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, on_delete=models.CASCADE, related_name = 'choices')
     choice_text = models.CharField(max_length = 2000)
     votes = models.IntegerField(default = 0)
     def __str__(self):

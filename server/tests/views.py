@@ -1,4 +1,4 @@
-from .models import Topic, Test, Step
+from .models import Topic, Test, Step, Subject
 from rest_framework import permissions, status
 from .permissions import IsCreatorOrReadOnly
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -9,10 +9,11 @@ from rest_framework.response import Response
 from django.shortcuts import render
 from rest_framework.views import APIView
 from .renderers import UserJSONRenderer
-from .serializers import RegistrationSerializer, LoginSerializer, UserSerializer, TopicSerializer, TestSerializer, StepSerializer, TopicSelectSerializer
+from .serializers import RegistrationSerializer, LoginSerializer, UserSerializer, TopicSerializer, TestSerializer, StepSerializer, TopicSelectSerializer, SubjectSelectSerializer
 from rest_framework.generics import RetrieveUpdateAPIView
 from django.utils import timezone
 import datetime
+from django.shortcuts import get_object_or_404
 
 class RegistrationAPIView(APIView):
     permission_classes = (AllowAny,)
@@ -62,10 +63,6 @@ class TestViewSet(viewsets.ModelViewSet):
     def perform_create(self, serializer):
         serializer.save(creator = self.request.user)
 
-
-# class UserViewSet(viewsets.ReadOnlyModelViewSet):
-    # queryset = User.objects.all()
-    # serializer_class = UserSerializer
 class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated,)
     renderer_classes = (UserJSONRenderer,)
@@ -103,6 +100,20 @@ class TopicSelectViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = TopicSelectSerializer
     permission_classes = (AllowAny, )
     pagination_class = None
+
+class SubjectSelectViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Subject.objects.all()
+    serializer_class = SubjectSelectSerializer
+    permission_classes = (AllowAny, )
+    pagination_class = None
+    @detail_route()
+    def subjects_by_topic(self, request, pk):
+        topic = get_object_or_404(Topic, pk = pk)
+        tests = Test.objects.filter(topic=topic)
+        subjects = Subject.objects.filter(test_id__in=tests)
+        subjects_json = SubjectSelectSerializer(subjects, many=True)
+        return Response(subjects_json.data)
+        
     
 class StepViewSet(viewsets.ModelViewSet):
     queryset = Step.objects.all()

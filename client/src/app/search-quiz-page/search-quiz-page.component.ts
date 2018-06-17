@@ -14,6 +14,7 @@ import { TestService } from '../test.service';
 export class SearchQuizPageComponent implements OnInit {
     public quizzes: Test[];
     public topics:Observable<Select2OptionData[]>;
+    public subjects:Observable<Select2OptionData[]>;
     public options: Select2Options;
     public tags: string[];
     constructor(private testService: TestService) { }
@@ -24,15 +25,28 @@ export class SearchQuizPageComponent implements OnInit {
             this.quizzes = tests.results;
         });
     }
-  
+    SearchQuizzes() {
+        console.log(this.topics, this.tags);
+        this.topics.subscribe(topic=>{
+            console.log(topic);
+        });
+        this.subjects.subscribe(subject=>{
+            console.log(subject);
+        });
+    }
+    TopicChanged(e) {
+        console.log('topic changed', e, e.value, this.topics);
+        this.subjects = this.testService.getSubjectsForSelectTopic(e.value);
+        
+    }
     ngOnInit() {
         this.getTests();
         this.options = {
             multiple: true,
-            theme: 'classic',
-            closeOnSelect: false
+            theme: 'classic'
         }
         this.tags = [];
-        this.topics = this.testService.getTopicsForSelect().delay(4000);
+        this.topics = this.testService.getTopicsForSelect();
+        this.subjects = this.testService.getSubjectsForSelect();
     }
 }

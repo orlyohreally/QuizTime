@@ -2,11 +2,12 @@ from django.contrib import admin
 from .models import User
 
 admin.site.register(User)
-from .models import Question, Choice, Test, Step, Topic
+from .models import Question, Choice, Test, Step, Topic, Subject
 
-class QuestionInline(admin.StackedInline):
-    model = Question
+class SubjectInline(admin.StackedInline):
+    model = Subject
     extra = 2
+    
 class ChoiceInline(admin.StackedInline):
     model = Choice
     extra = 2
@@ -22,7 +23,7 @@ class TestAdmin(admin.ModelAdmin):
     fieldsets = [
         (None, {'fields': ['name', 'pub_date', 'topic', 'slug', 'icon']})
     ]
-    inlines = [QuestionInline]
+    inlines = [SubjectInline]
     def save_model(self, request, obj, form, change):
         obj.creator = request.user
         super().save_model(request, obj, form, change)

@@ -4,28 +4,32 @@
         <h1>Find perfect quiz for yourself</h1>
         <div id = "topics-select">
             <label for="topic-selector">Topics</label>
-            <select2 [data]="topics|async" [options]="options" [cssImport]=true></select2>
+            <select2 (valueChanged)="TopicChanged($event)" [data]="topics|async" [width]="200" [cssImport]=true></select2>
+        </div>
+        <div id = "subjects-select">
+            <label for="topic-selector">Subjects</label>
+            <select2 [data]="subjects|async" [options]="options" [width]="200" [cssImport]=false></select2>
         </div>
         <div class = "key-words-input">
             <label for="key-words">Key words</label>
-            <rl-tag-input [(ngModel)]="tags" placeholder="type in your key words separated by comma"></rl-tag-input>
+            <rl-tag-input id="key-words" [(ngModel)]="tags" placeholder="key word1, key word2"></rl-tag-input>
         </div>
-        <a href = "#" class = "quiz-all"><span class = "fa fa-arrow-right"></span></a>
+        <button (click) = "SearchQuizzes()" class = "quiz-all"><span class = "fa fa-arrow-right"></span></button>
         
     </div>
 
     <div id = "quizzes">
         <h1>Search results</h1>
         <div class = "quizzes-list">
-            <a *ngFor="let quiz of quizzes" class = "quiz" href = "#">
+            <a *ngFor="let quiz of quizzes" class = "quiz" href = "/quizzes/{{quiz.slug}}">
                 <div class = "quiz-description">
                     <img class = "quiz-icon" src = "{{quiz.icon}}"/>
                     <span class = "quiz-name">{{quiz.name}}</span>
                 </div>
                 <div class = "quiz-details">
-                    <span class = "quiz-topic">{{quiz.topic}}</span> <span class = "quiz-stats"> {{quiz.question_set.length}} questions</span>
+                    <span class = "quiz-topic">{{quiz.topic}}</span> <span class = "quiz-stats"> {{quiz.questions.length}} questions</span>
                     <ul class = "quiz-subjects">
-                        <li class = "quiz-subject">Subject subject 1</li>
+                        <li *ngFor="let subject of quiz.subjects" class = "quiz-subject">{{subject.short_description}}</li>
                     </ul>
                 </div>
             </a>
