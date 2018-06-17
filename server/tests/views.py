@@ -9,8 +9,10 @@ from rest_framework.response import Response
 from django.shortcuts import render
 from rest_framework.views import APIView
 from .renderers import UserJSONRenderer
-from .serializers import RegistrationSerializer, LoginSerializer, UserSerializer, TopicSerializer, TestSerializer, StepSerializer
+from .serializers import RegistrationSerializer, LoginSerializer, UserSerializer, TopicSerializer, TestSerializer, StepSerializer, TopicSelectSerializer
 from rest_framework.generics import RetrieveUpdateAPIView
+from django.utils import timezone
+import datetime
 
 class RegistrationAPIView(APIView):
     permission_classes = (AllowAny,)
@@ -53,7 +55,7 @@ class LoginAPIView(APIView):
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 class TestViewSet(viewsets.ModelViewSet):
-    queryset = Test.objects.all()
+    queryset = Test.objects.filter(pub_date__lte=datetime.datetime.now(tz=timezone.utc))
     serializer_class = TestSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsCreatorOrReadOnly,)
 
@@ -95,7 +97,13 @@ class TopicViewSet(viewsets.ModelViewSet):
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, )
     def perform_create(self, serializer):
         serializer.save(creator = self.request.user)
-
+        
+class TopicSelectViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Topic.objects.all()
+    serializer_class = TopicSelectSerializer
+    permission_classes = (AllowAny, )
+    pagination_class = None
+    
 class StepViewSet(viewsets.ModelViewSet):
     queryset = Step.objects.all()
     serializer_class = StepSerializer

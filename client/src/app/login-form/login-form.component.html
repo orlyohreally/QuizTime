@@ -5,7 +5,7 @@
         <input id = "login" (keydown.enter)="submit_form()" class="form-control" formControlName="login_username" required type = "text" placeholder = "Username or email"/>
         <div class = "alert alert-danger" *ngIf="login_username.invalid && (login_username.dirty || login_username.touched)">
             <span *ngIf="login_username.errors.required" >Login is required</span>
-            <span *ngIf="login_username.errors.multiPattern">Invalid login</span>
+            <span *ngIf="!login_username.errors.required && login_username.errors.multiPattern">Invalid login</span>
             <span *ngIf="login_username.errors.server" >{{login_username.errors.server}}</span>
         </div>
     </div>

@@ -92,7 +92,8 @@ tags tag > div::before {
 }
 #quizzes .quiz {
     display: inline-block;
-    margin-right: 2%;
+    margin-right: 1%;
+    margin-left: 1%;
     margin-bottom: 20px;
     width: 20%;
     text-decoration: none;
@@ -103,9 +104,6 @@ tags tag > div::before {
     vertical-align: middle;
 }
 
-#quizzes .quiz:nth-child(3n) {
-    margin-right: 0;
-}
 #quizzes .quiz:hover {
     color: #000;
     background-color: rgba(109, 168, 214, 0.2); /*#5acde7;*/
@@ -167,9 +165,6 @@ tags tag > div::before {
         width: 80%;
         margin: auto;
         margin-bottom: 5px;
-    }
-    #quizzes .quiz:nth-child(3n) {
-        margin-right: auto;
     }
     #quizzes .quiz-all {
         position: relative;

@@ -9,6 +9,7 @@ router = DefaultRouter()
 router.register(r'quizzes', views.TestViewSet)
 router.register(r'topics', views.TopicViewSet)
 router.register(r'steps', views.StepViewSet)
+router.register(r'topics-select', views.TopicSelectViewSet)
 
 urlpatterns = [
     url(r'auth/', include('rest_framework.urls')),
@@ -17,6 +18,6 @@ urlpatterns = [
     url(r'^user/?$', views.UserRetrieveUpdateAPIView.as_view()),
     #url(r'^schema/$', schema_view),
     url(r'^', include(router.urls)),
-    #url(r'^main-page', views.main_page_template),
-    #url(r'^quizzes', views.quizzes_template),
+    url(r'^main-page_t', views.main_page_template),
+    url(r'^quizzes_t', views.quizzes_template),
 ]

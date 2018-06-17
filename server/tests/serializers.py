@@ -141,12 +141,13 @@ class UserSerializer(serializers.ModelSerializer):
 
         return instance 
         
-class TestSerializer(serializers.HyperlinkedModelSerializer):
+class TestSerializer(serializers.ModelSerializer):
     creator = serializers.ReadOnlyField(source = 'creator.username')
+    topic = serializers.ReadOnlyField(source = 'topic.name')
     #name = serializers.HyperlinkedIdentityField(view_name = 'test-name', format = 'html')
     class Meta:
         model = Test
-        fields = ('id', 'url', 'name', 'pub_date', 'creator', 'topic', 'slug', 'icon')
+        fields = ('id', 'url', 'name', 'pub_date', 'creator', 'topic', 'slug', 'icon', 'question_set')
         
 class TopicSerializer(serializers.HyperlinkedModelSerializer):
     creator = serializers.ReadOnlyField(source = 'creator.username')
@@ -154,6 +155,12 @@ class TopicSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Topic
         fields = ('id', 'name', 'creat_date', 'creator', 'icon', 'test_set',)
+class TopicSelectSerializer(serializers.ModelSerializer):
+    text = serializers.CharField(source='name')
+    class Meta:
+        model = Topic
+        fields = ('id', 'text',)
+    
 class StepSerializer(serializers.HyperlinkedModelSerializer):
     
     class Meta:

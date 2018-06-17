@@ -30,7 +30,7 @@ export class AppComponent  implements OnInit {
     }
     
     IsAuthenticated() {
-        return localStorage.getItem('id_toke') != undefined;
+        return localStorage.getItem('id_toke') != null;
     }
     LogIn(token: string) {
         localStorage.setItem('id_toke', token);

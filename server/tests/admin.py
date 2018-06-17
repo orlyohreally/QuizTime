@@ -20,7 +20,7 @@ class TopicAdmin(admin.ModelAdmin):
         super().save_model(request, obj, form, change)
 class TestAdmin(admin.ModelAdmin):
     fieldsets = [
-        (None, {'fields': ['name', 'pub_date', 'topic', 'slug', ]})
+        (None, {'fields': ['name', 'pub_date', 'topic', 'slug', 'icon']})
     ]
     inlines = [QuestionInline]
     def save_model(self, request, obj, form, change):
