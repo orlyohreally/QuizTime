@@ -32,5 +32,14 @@ export class AppComponent  implements OnInit {
     IsAuthenticated() {
         return localStorage.getItem('id_toke') != undefined;
     }
+    LogIn(token: string) {
+        localStorage.setItem('id_toke', token);
+        this.authenticated = true;
+    }
+    LogOut() {
+        localStorage.removeItem('id_toke');
+        this.authenticated = false;
+        console.log('logged out');
+    }
     
 }

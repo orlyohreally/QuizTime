@@ -36,4 +36,8 @@ export class MainMenuComponent implements OnInit {
     CloseLoginForm() {
         this.appComponent.CloseComponentModal();
     }
+    LogOut() {
+        this.appComponent.LogOut();
+        console.log('logging out');
+    }
 }

@@ -1,6 +1,6 @@
 <div id = "topics">
     <h1>Topics</h1>
-    <a *ngFor="let topic of topics.results|slice:0:3" class = "topic" routerLink = "#">
+    <a *ngFor="let topic of topics|slice:0:3" class = "topic" routerLink = "#">
         <img class = "topic-icon" src = "{{topic.icon}}"/>
         <div class = "topic-description">
             <span class = "topic-name">{{topic.name}}</span>

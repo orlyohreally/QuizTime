@@ -7,6 +7,6 @@
     <ul class="nav-menu" [ngClass]="{'collapsed':collapsed}">
         <li class = "active"><a href="/quizzes">Quizzes</a></li>
         <li *ngIf="!appComponent.authenticated"><button (click)="ShowLoginForm()" >Log in</button></li>
-        <li *ngIf="appComponent.authenticated"><button >Profile</button></li>
+        <li *ngIf="appComponent.authenticated"><button (click)="LogOut()">Profile</button></li>
     </ul>
 </nav>

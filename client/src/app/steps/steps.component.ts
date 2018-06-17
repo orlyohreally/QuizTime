@@ -15,7 +15,7 @@ export class StepsComponent implements OnInit {
     }
     getSteps(): void {
         this.testService.getSteps()
-        .subscribe(steps => this.steps = steps);
+        .subscribe(steps => this.steps = steps.results);
     }
 
 }

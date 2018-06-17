@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Select2Module } from 'ng2-select2';
+import {RlTagInputModule} from 'angular2-tag-input';
 
 import { AppComponent } from './app.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
@@ -46,6 +47,7 @@ import { FooterComponent } from './footer/footer.component';
     ReactiveFormsModule,
     
     Select2Module,
+    RlTagInputModule,
   ],
   providers: [TestService, ModalService],
   bootstrap: [AppComponent]

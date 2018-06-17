@@ -10,14 +10,14 @@ import 'rxjs/add/operator/map';
 
 @Injectable()
 export class TestService {
-    getTopics(): Observable<Topic[]> {
-        return this.http.get<Topic[]>(this.topicsUrl)
+    getTopics(): Observable<any> {
+        return this.http.get<any>(this.topicsUrl)
         .pipe(
             catchError(this.handleError('getTopics', []))
         );
     }
-    getSteps(): Observable<Step[]> {
-        return this.http.get<Step[]>(this.stepsUrl)
+    getSteps(): Observable<any> {
+        return this.http.get<any>(this.stepsUrl)
         .pipe(
             catchError(this.handleError('getSteps', []))
         );
@@ -26,7 +26,7 @@ export class TestService {
     loginUser(user: User): Observable<any> {
         return this.http.post<any>(this.loginUserUrl, {"user": user})
     }
-    registerUser(user: User) {
+    registerUser(user: User): Observable<any>  {
         return this.http.post(this.registerUserUrl, {"user": user});  
     }
     private handleError<T> (operation = 'operation', result?: T) {

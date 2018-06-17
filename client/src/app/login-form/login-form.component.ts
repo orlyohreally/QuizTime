@@ -4,6 +4,7 @@ import { multiPatternValidator } from '../validation/login-validation.directive'
 import { matchValidator } from '../validation/match-validation.directive';
 import { User } from  '../user';
 import { TestService } from '../test.service';
+import { AppComponent } from '../app.component';
 @Component({
     selector: 'app-login-form',
     templateUrl: './login-form.component.html',
@@ -17,7 +18,7 @@ export class LoginFormComponent implements OnInit {
     type: string;
     submitted = false;
     errors: string[];
-    constructor(private testService: TestService) { }
+    constructor(private testService: TestService, private appComponent: AppComponent) { }
     
     username_regex = /^[a-z0-9_-]{5,15}$/;
     email_regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
@@ -25,9 +26,9 @@ export class LoginFormComponent implements OnInit {
     
     ngOnInit() {
         this.type = 'login';
-        
+        this.errors = [];
         this.loginForm = new FormGroup({
-            'login_login': new FormControl(this.data.login, [
+            'login_username': new FormControl(this.data.login, [
                 Validators.required,
                 multiPatternValidator([this.username_regex, this.email_regex])
             ]),
@@ -38,7 +39,7 @@ export class LoginFormComponent implements OnInit {
         });
         
         this.signinForm = new FormGroup({
-            'signin_login': new FormControl(this.data.login, [
+            'signin_username': new FormControl(this.data.login, [
                 Validators.required,
                 Validators.pattern(this.username_regex),
             ]),
@@ -53,7 +54,7 @@ export class LoginFormComponent implements OnInit {
             ]),
             'signin_email': new FormControl(this.data.email, [
                 Validators.required,
-                //Validators.pattern(this.email_regex),
+                Validators.pattern(this.email_regex),
             ]),
             'signin_agreement': new FormControl(this.data.agreement, [
                 Validators.required,
@@ -68,11 +69,11 @@ export class LoginFormComponent implements OnInit {
         });
     }
     
-    get login_login() { return this.loginForm.get('login_login'); }
+    get login_username() { return this.loginForm.get('login_username'); }
     get login_password() { return this.loginForm.get('login_password'); }
     
     
-    get signin_login() { return this.signinForm.get('signin_login'); }
+    get signin_username() { return this.signinForm.get('signin_username'); }
     get signin_password() { return this.signinForm.get('signin_password'); }
     get signin_password_ver() { return this.signinForm.get('signin_password_ver'); }
     get signin_email() { return this.signinForm.get('signin_email'); }
@@ -83,12 +84,15 @@ export class LoginFormComponent implements OnInit {
     
     showRegisterForm() {
         this.type = 'signin';
+        this.errors = [];
     }
     showLoginForm() {
         this.type = 'login';
+        this.errors = [];
     }
     showForgotPasswordForm() {
         this.type = 'forgot_password';
+        this.errors = [];
     }
     validateForm(formGroup: FormGroup) {
         Object.keys(formGroup.controls).forEach(field=> {
@@ -102,23 +106,31 @@ export class LoginFormComponent implements OnInit {
         });
     }
     submit_form() {
+        this.errors = [];
         var form = null;
         var l_user;
         switch(this.type) {
             case 'login':
                 form = this.loginForm;
                 if(form.valid) {
-                    l_user = new User(this.loginForm.get('login_login').value, this.loginForm.get('login_password').value);
+                    l_user = new User(this.loginForm.get('login_username').value, this.loginForm.get('login_password').value);
                     this.testService.loginUser(l_user).subscribe(
-                      user => {
-                        console.log('success', user, user.user, user.user.token);
-                        localStorage.setItem('id_toke', user.user.token);
-                      },
-                      HttpErrorResponse => {
-                        console.log(HttpErrorResponse, HttpErrorResponse.error.errors.error);
-                        this.errors = HttpErrorResponse.error.errors.error;
-                        
-                      }
+                        user => {
+                            console.log('success', user, user.user, user.user.token);
+                            this.appComponent.LogIn(user.user.token);
+                            this.appComponent.CloseComponentModal();
+                        },
+                        HttpErrorResponse => {
+                            for (let field in HttpErrorResponse.error.errors) {
+                                console.log(HttpErrorResponse.error.errors[field]);
+                                HttpErrorResponse.error.errors[field].forEach(error=>{
+                                    if(field != 'error')
+                                       form.controls['login_' + field].setErrors({'server': error});
+                                    else
+                                       this.errors.push(error);
+                                });
+                            }
+                        }
                     );
                 }
                 else 
@@ -127,19 +139,25 @@ export class LoginFormComponent implements OnInit {
             case 'signin':
                 form = this.signinForm;
                 if(form.valid) {
-                    console.log(form.get('signin_login').value);
-                    console.log(form.get('signin_password').value);
-                    l_user = new User(form.get('signin_email').value, form.get('signin_password').value, form.get('signin_login').value);
+                    l_user = new User(form.get('signin_email').value, form.get('signin_password').value, form.get('signin_username').value);
                     console.log(l_user);
                     this.testService.registerUser(l_user).subscribe(
-                      user => {
-                        console.log('success', user);
-                      },
-                      HttpErrorResponse => {
-                        console.log(HttpErrorResponse, HttpErrorResponse.error.errors.error);
-                        this.errors = HttpErrorResponse.error.errors.error;
-                        
-                      }
+                        user => {
+                            console.log('success', user);
+                            this.appComponent.LogIn(user.user.token);
+                            this.appComponent.CloseComponentModal();
+                        },
+                        HttpErrorResponse => {
+                            console.log(HttpErrorResponse, HttpErrorResponse.error.errors.error);
+                            for (let field in HttpErrorResponse.error.errors) {
+                                HttpErrorResponse.error.errors[field].forEach(error=>{
+                                    if(field != 'error')
+                                        form.controls['signin_' + field].setErrors({'server': error});
+                                     else
+                                        this.errors.push(error);
+                                });
+                            }
+                        }
                     );
                 }
                 else 
@@ -149,18 +167,5 @@ export class LoginFormComponent implements OnInit {
                 form = this.forgot_passwordForm;
                 break;
         }
-        /*if(form != null) {
-            if(form.valid) {
-                this.submitted = true;
-                console.log(this.type +' submitted!');
-                if(user) {
-                    console.log('there is user');
-                }
-            }
-            else {
-                this.validateForm(form);
-            }
-        }*/
-            
     }
 }

@@ -4,11 +4,11 @@
         <h1>Find perfect quiz for yourself</h1>
         <div id = "topics-select">
             <label for="topic-selector">Topics</label>
-            <select2 [data]="topics" [cssImport]=true></select2>
+            <select2 [data]="topics|async" [value]="defaultTopic"[cssImport]=true></select2>
         </div>
         <div class = "key-words-input">
             <label for="key-words">Key words</label>
-            <input id = "key-words" name="key-words" placeholder="your key words">
+            <rl-tag-input [(ngModel)]="tags" placeholder="type in your key words separated by comma"></rl-tag-input>
         </div>
         <a href = "#" class = "quiz-all"><span class = "fa fa-arrow-right"></span></a>
         
