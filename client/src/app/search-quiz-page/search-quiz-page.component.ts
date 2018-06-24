@@ -3,9 +3,9 @@ import { Select2OptionData } from 'ng2-select2';
 import { Test } from '../Test';
 
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/delay';
-import 'rxjs/add/observable/of';
 import { TestService } from '../test.service';
+
+
 @Component({
   selector: 'app-search-quiz-page',
   templateUrl: './search-quiz-page.component.html',
@@ -22,6 +22,7 @@ export class SearchQuizPageComponent implements OnInit {
     getTests(): void {
         this.testService.getTests()
         .subscribe(tests => {
+            console.log(tests);
             this.quizzes = tests.results;
         });
     }

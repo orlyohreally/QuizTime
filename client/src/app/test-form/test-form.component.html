@@ -1,0 +1,43 @@
+<form [formGroup]="testForm" #lForm="ngForm" class = "modal">
+    <h1 *ngIf="data.id==undefined">Create new test</h1>
+    <h1 *ngIf="data.id!=0">Edit test</h1>
+    <div class = "form-input-holder required">
+        <label for = "test_name">Title</label>
+        <input id = "test_name" (keydown.enter)="submit_form()" class="form-control" formControlName="test_name" required type = "text" placeholder = "Test name"/>
+        <div class = "alert alert-danger" *ngIf="test_name.invalid && (test_name.dirty || test_name.touched)">
+            <span *ngIf="test_name.errors.required" >Title is required</span>
+            <span *ngIf="test_name.errors.server" >{{test_name.errors.server}}</span>
+        </div>
+    </div>
+    <div class = "form-input-holder required">
+        <label for = "test_slug">Slug</label>
+        <input id = "test_slug" (keydown.enter)="submit_form()" class="form-control" formControlName="test_slug" required type = "text" placeholder = "Test slug for url"/>
+        <div class = "alert alert-danger" *ngIf="test_slug.invalid && (test_slug.dirty || test_slug.touched)">
+            <span *ngIf="test_slug.errors.required" >Login is required</span>
+            <span *ngIf="test_slug.errors.server" >{{test_slug.errors.server}}</span>
+        </div>
+    </div>
+    <div class = "form-input-holder required">
+        <label for = "test_icon">Icon</label>
+        <input id = "test_icon" (keydown.enter)="submit_form()" class="form-control" formControlName="test_icon" required type = "file"/>
+        <div class = "alert alert-danger" *ngIf="test_icon.invalid && (test_icon.dirty || test_icon.touched)">
+            <span *ngIf="test_icon.errors.required" >Login is required</span>
+            <span *ngIf="test_icon.errors.server" >{{test_icon.errors.server}}</span>
+        </div>
+    </div>
+    <div class = "form-input-holder required">
+        <label for="test_topic">Topic</label>
+        <select2 id = "test_topic" [data]="topics|async" [width]="200" [cssImport]=true></select2>
+        <div class = "form-button-holder">
+            <button type = "button" >New topic</button>
+        </div>
+    </div>
+    
+    <div class = "alert alert-danger" *ngIf="errors?.length > 0">
+        <span *ngFor="let error of errors" >{{error}}</span><br *ngFor="let error of errors">
+    </div>
+    
+    <div class = "form-button-holder">
+        <button *ngIf="data.id==0" type = "button" (click)="CreateTest()" >Create</button>
+    </div>
+</form>

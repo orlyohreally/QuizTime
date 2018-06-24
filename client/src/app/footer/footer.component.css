@@ -30,6 +30,10 @@ footer .subscription-form {
     display: inline-block;
     vertical-align: top;
 }
+#subscription-form {
+    margin: 0;
+    padding: 0;
+}
 #subscription-form input {
     padding: 10px 20px;
     border: 1px solid #ffbe58;
@@ -80,7 +84,13 @@ footer .logo {
     #subscription-form .email-holder {
         margin: 0 auto;
     }
+    #subscription-form .email-holder input {
+        width: 200px;
+    }
     footer .logo {
         display: none;
+    }
+    footer #subscription-form {
+        padding: 0 20px;
     }
 }

@@ -1,12 +1,45 @@
 <nav class="navbar">
-    <button type="button" (click)="toggleMobileMenu()" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+    <button type="button" (click)="ToggleMobileMenu()" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
         <span class="sr-only">Toggle navigation</span>
         <span class="icon-bars fa fa-bars"></span>
     </button>
     <a class="navbar-brand" href="/"><img class = "logo" src="assets/idea.svg" /><span>Quiz time</span></a>
     <ul class="nav-menu" [ngClass]="{'collapsed':collapsed}">
         <li class = "active"><a href="/quizzes">Quizzes</a></li>
-        <li *ngIf="!appComponent.authenticated"><button (click)="ShowLoginForm()" >Log in</button></li>
-        <li *ngIf="appComponent.authenticated"><button (click)="LogOut()">Profile</button></li>
+        <li *ngIf="!authService.IsAuthenticated()"><button (click)="ShowLoginForm()" >Log in</button></li>
+        
+        <li *ngIf="authService.IsAuthenticated()">
+        <div>
+            <button (click)="ShowProfileMenu()">Profile</button>
+            <ul *ngIf="authService.IsAuthenticated()" class = "nav-sub-menu"[ngClass]="{'collapsed':profile_collapsed}">
+                <li><button (click)="NewTest()">Create new test</button></li>
+                <li><button>Settings</button></li>
+                <li (click)="LogOut()"><button>Log out</button></li>
+            </ul>
+            </div>
+        </li>
     </ul>
 </nav>
+<!--
+
+<li _ngcontent-c3="" style="
+    position:  relative;
+"><div _ngcontent-c3=""><button _ngcontent-c3="">Profile</button><ul _ngcontent-c3="" ng-reflect-ng-class="[object Object]" style="
+    position:  absolute;
+    right:  0;
+    padding:  0;
+    margin:  0;
+    width: 200px;
+"><li _ngcontent-c3="" style="
+    display:  block;
+    float:  right;
+    margin:  0;
+    padding:  0;
+"><button _ngcontent-c3="">Create new test</button></li><li _ngcontent-c3="" style="
+    display:  block;
+    float:  right;
+    margin:  0;
+    padding:  0;
+"><button _ngcontent-c3="">Settings</button></li></ul></div></li>
+
+ -->

@@ -1,43 +1,50 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalService } from '../modal.service';
 import { LoginFormComponent } from '../login-form/login-form.component';
+import { TestFormComponent } from '../test-form/test-form.component';
 
-import { AppComponent } from '../app.component';
-
+import { AuthService } from '../auth.service';
 
 @Component({
     selector: 'app-main-menu',
     templateUrl: './main-menu.component.html',
     styleUrls: ['./main-menu.component.css'],
     host: {
-        '(window:resize)': 'onResize($event)'
+        '(window:resize)': 'OnResize($event)'
     }
 })
 export class MainMenuComponent implements OnInit {
     collapsed: boolean;
-    constructor(private modalService: ModalService, private appComponent: AppComponent) {}
-
+    constructor(private modalService: ModalService, private authService: AuthService) {}
+    profile_collapsed:boolean;
     ngOnInit() {
         this.collapsed = false;
+        this.profile_collapsed = true;
     }
-    onResize(event) {
-        console.log(event, event.target.innerWidth);
+    OnResize(event) {
         if(event.target.innerWidth > 768)
             this.collapsed = false;
     }
-    toggleMobileMenu() {
+    
+    ToggleMobileMenu() {
         this.collapsed = !this.collapsed;
     }
     ShowLoginForm() {
         this.collapsed = false;
-        this.appComponent.LoadComponentModal(LoginFormComponent);
+        this.modalService.LoadComponentModal(LoginFormComponent);
     }
-    
+    NewTest() {
+        this.collapsed = false;
+        this.modalService.LoadComponentModal(TestFormComponent);
+    }
+    ShowProfileMenu() {
+        this.profile_collapsed = !this.profile_collapsed;
+    }
     CloseLoginForm() {
-        this.appComponent.CloseComponentModal();
+        this.modalService.LoadComponentModal(null);
     }
     LogOut() {
-        this.appComponent.LogOut();
+        this.authService.LogOut();
         console.log('logging out');
     }
 }

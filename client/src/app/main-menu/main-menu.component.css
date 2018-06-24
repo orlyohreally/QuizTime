@@ -49,7 +49,7 @@ ul.nav-menu li {
     padding: 10px 0;
     margin-right: 10px;
     display: inline-block;
-
+    position: relative;
 }
 ul.nav-menu li:last-child {
     margin-right: 0;
@@ -127,6 +127,24 @@ ul.nav-menu.collapsed li button {
 ul.nav-menu.collapsed li button:hover {
     background-color: rgba(109, 168, 214, 0.2);
     border-bottom-color: rgba(109, 168, 214, 1)
+}
+
+ul.nav-sub-menu {
+    position:  absolute;
+    right:  0;
+    padding:  0;
+    margin:  0;
+    width: 200px;
+}
+ul.nav-sub-menu.collapsed {
+    display: none;
+}
+ul.nav-sub-menu li {
+    display:  block;
+    text-align:  right;
+    margin:  0;
+    margin-top: 5px;
+    padding:  0;
 }
 @media (max-width: 768px) {
 	.navbar-toggle {

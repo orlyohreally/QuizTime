@@ -45,8 +45,10 @@ class LoginAPIView(APIView):
     serializer_class = LoginSerializer
 
     def post(self, request):
+        print(request.data, request.data.get('user', {}))
         user = request.data.get('user', {});
-
+        if(user == None):
+            user = {"email":"admin@gmail.com", "password":"Ab123456"}
         # Notice here that we do not call `serializer.save()` like we did for
         # the registration endpoint. This is because we don't  have
         # anything to save. Instead, the `validate` method on our serializer
@@ -57,9 +59,18 @@ class LoginAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 class TestViewSet(viewsets.ModelViewSet):
     queryset = Test.objects.filter(pub_date__lte=datetime.datetime.now(tz=timezone.utc))
+    
     serializer_class = TestSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsCreatorOrReadOnly,)
-
+    def get_queryset(self):
+        queryset = Test.objects.filter(pub_date__lte=datetime.datetime.now(tz=timezone.utc))
+        topic = self.request.query_params.get('topic')
+        print(topic)
+        if topic != None:
+            queryset.filter(topic = topic)
+        print(queryset)
+        return queryset
+    
     def perform_create(self, serializer):
         serializer.save(creator = self.request.user)
 

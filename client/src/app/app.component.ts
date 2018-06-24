@@ -3,7 +3,9 @@ import * as $ from 'jquery';
 
 import { ModalItem } from './modal-item';
 import { ModalComponent } from './modal/modal.component';
+import { ModalService } from './modal.service';
 
+import { Subscription } from 'rxjs';
 @Component({
     selector: 'body',
     templateUrl: './app.component.html',
@@ -11,35 +13,24 @@ import { ModalComponent } from './modal/modal.component';
 })
 export class AppComponent  implements OnInit {
     title = 'app';
-
+    subscription: Subscription;
     modal: ModalItem;
-    authenticated: boolean;
-    constructor() { 
-        this.authenticated = this.IsAuthenticated();
-    }
-  
-    ngOnInit() {
-        this.modal = new ModalItem(null);
+    constructor(private modalService: ModalService) { 
+        this.modal = this.modalService.modal;
+        this.subscription = this.modalService.modalChange.subscribe((value)=>{
+            this.modal = value;
+        });
     }
     LoadComponentModal(component) {
-        this.modal = new ModalItem(component);
+        this.modalService.LoadComponentModal(component);
     }
-
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
+    }
+    ngOnInit() {
+    }
+    
     CloseComponentModal() {
-        this.modal = new ModalItem(null);
+        this.modalService.LoadComponentModal(null);
     }
-    
-    IsAuthenticated() {
-        return localStorage.getItem('id_toke') != null;
-    }
-    LogIn(token: string) {
-        localStorage.setItem('id_toke', token);
-        this.authenticated = true;
-    }
-    LogOut() {
-        localStorage.removeItem('id_toke');
-        this.authenticated = false;
-        console.log('logged out');
-    }
-    
 }

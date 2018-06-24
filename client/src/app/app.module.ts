@@ -1,8 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Select2Module } from 'ng2-select2';
 import {RlTagInputModule} from 'angular2-tag-input';
+
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { TokenInterceptor } from './token.interceptor';
+import { AuthErrorHandler } from './auth.error-handler';
 
 import { AppComponent } from './app.component';
 import { MainMenuComponent } from './main-menu/main-menu.component';
@@ -14,6 +18,7 @@ import { TopicsComponent } from './topics/topics.component';
 import { TestService } from './test.service';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { LoginFormComponent } from './login-form/login-form.component';
+import { TestFormComponent } from './test-form/test-form.component';
 
 import { ModalService } from './modal.service';
 import { ModalDirective } from './modal.directive';
@@ -33,11 +38,13 @@ import { FooterComponent } from './footer/footer.component';
     ModalDirective,
     ModalComponent,
     LoginFormComponent,
+    TestFormComponent,
     SearchQuizPageComponent,
     FooterComponent,
   ],
   entryComponents:[
-    LoginFormComponent
+    LoginFormComponent,
+    TestFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,7 +56,20 @@ import { FooterComponent } from './footer/footer.component';
     Select2Module,
     RlTagInputModule,
   ],
-  providers: [TestService, ModalService],
+  providers: [
+    TestService,
+    ModalService,
+    {
+        provide: HTTP_INTERCEPTORS,
+        useClass: TokenInterceptor,
+        multi: true
+    },
+    AuthErrorHandler,
+    {
+        provide: ErrorHandler,
+        useClass: AuthErrorHandler
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

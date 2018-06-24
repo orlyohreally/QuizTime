@@ -4,7 +4,7 @@ from tests.models import Topic, Test, Step, Subject, Question, Choice
 
 from django.contrib.auth import authenticate
 from .models import User
-
+from rest_framework.fields import CurrentUserDefault
 
 class RegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
@@ -158,10 +158,14 @@ class TestSerializer(serializers.ModelSerializer):
     topic = serializers.ReadOnlyField(source = 'topic.name')
     subjects = SubjectSerializer(many = True, read_only = True)
     questions = QuestionSerializer(many = True, read_only = True)
+    
+    edit = serializers.SerializerMethodField()
+    def get_edit(self, obj):
+        return self.context['request'].user == obj.creator
     #name = serializers.HyperlinkedIdentityField(view_name = 'test-name', format = 'html')
     class Meta:
         model = Test
-        fields = ('id', 'url', 'name', 'pub_date', 'creator', 'topic', 'slug', 'icon', 'subjects', 'questions')
+        fields = ('id', 'url', 'name', 'pub_date', 'creator', 'topic', 'slug', 'icon', 'subjects', 'questions', 'edit')
         
 class TopicSerializer(serializers.HyperlinkedModelSerializer):
     creator = serializers.ReadOnlyField(source = 'creator.username')

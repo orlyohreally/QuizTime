@@ -4,7 +4,10 @@ import { multiPatternValidator } from '../validation/login-validation.directive'
 import { matchValidator } from '../validation/match-validation.directive';
 import { User } from  '../user';
 import { TestService } from '../test.service';
-import { AppComponent } from '../app.component';
+import { ModalService } from '../modal.service';
+
+import { AuthService } from '../auth.service';
+import { Subscription } from 'rxjs';
 @Component({
     selector: 'app-login-form',
     templateUrl: './login-form.component.html',
@@ -18,7 +21,10 @@ export class LoginFormComponent implements OnInit {
     type: string;
     submitted = false;
     errors: string[];
-    constructor(private testService: TestService, private appComponent: AppComponent) { }
+    
+    constructor(private testService: TestService, private modalService: ModalService, private authService: AuthService) {
+    
+    }
     
     username_regex = /^[a-z0-9_-]{5,15}$/;
     email_regex = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$/;
@@ -117,10 +123,11 @@ export class LoginFormComponent implements OnInit {
                     this.testService.loginUser(l_user).subscribe(
                         user => {
                             console.log('success', user, user.user, user.user.token);
-                            this.appComponent.LogIn(user.user.token);
-                            this.appComponent.CloseComponentModal();
+                            this.authService.LogIn(user.user.token);
+                            this.modalService.LoadComponentModal(null);
                         },
                         HttpErrorResponse => {
+                            console.log(HttpErrorResponse);
                             for (let field in HttpErrorResponse.error.errors) {
                                 console.log(HttpErrorResponse.error.errors[field]);
                                 HttpErrorResponse.error.errors[field].forEach(error=>{
@@ -144,8 +151,8 @@ export class LoginFormComponent implements OnInit {
                     this.testService.registerUser(l_user).subscribe(
                         user => {
                             console.log('success', user);
-                            this.appComponent.LogIn(user.user.token);
-                            this.appComponent.CloseComponentModal();
+                            this.authService.LogIn(user.user.token);
+                            this.modalService.LoadComponentModal(null);
                         },
                         HttpErrorResponse => {
                             console.log(HttpErrorResponse, HttpErrorResponse.error.errors.error);
