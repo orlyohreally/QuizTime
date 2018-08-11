@@ -24,10 +24,10 @@
             <a *ngFor="let quiz of quizzes" class = "quiz" href = "/quizzes/{{quiz.slug}}">
                 <div class = "quiz-description">
                     <img class = "quiz-icon" src = "{{quiz.icon}}"/>
-                    <span class = "quiz-name">{{quiz.edit}} {{quiz.name}}</span>
+                    <span class = "quiz-name">{{quiz.name}}</span>
                 </div>
                 <div class = "quiz-details">
-                    <span class = "quiz-topic">{{quiz.topic}}</span> <span class = "quiz-stats"> {{quiz.questions.length}} questions</span>
+                    <span class = "quiz-topic">{{quiz.topic_name}}</span> <span class = "quiz-stats"> {{quiz.questions.length}} questions</span>
                     <ul class = "quiz-subjects">
                         <li *ngFor="let subject of quiz.subjects" class = "quiz-subject">{{subject.short_description}}</li>
                     </ul>

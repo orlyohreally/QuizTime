@@ -92,7 +92,7 @@ class Topic(models.Model):
     name = models.CharField(max_length=200)
     creator = models.ForeignKey('User', related_name = 'topics', on_delete = models.CASCADE)
     creat_date = models.DateTimeField('date created', default = timezone.now)
-    icon = models.FileField('topic icon')
+    icon = models.ImageField('topic icon')
     def __str__(self):
         return self.name
     class Meta:

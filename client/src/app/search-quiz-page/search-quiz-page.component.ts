@@ -37,8 +37,7 @@ export class SearchQuizPageComponent implements OnInit {
     }
     TopicChanged(e) {
         console.log('topic changed', e, e.value, this.topics);
-        this.subjects = this.testService.getSubjectsForSelectTopic(e.value);
-        
+        this.subjects = this.testService.getSubjectsForSelectTopic(e.value);  
     }
     ngOnInit() {
         this.getTests();

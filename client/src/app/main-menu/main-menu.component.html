@@ -7,7 +7,6 @@
     <ul class="nav-menu" [ngClass]="{'collapsed':collapsed}">
         <li class = "active"><a href="/quizzes">Quizzes</a></li>
         <li *ngIf="!authService.IsAuthenticated()"><button (click)="ShowLoginForm()" >Log in</button></li>
-        
         <li *ngIf="authService.IsAuthenticated()">
         <div>
             <button (click)="ShowProfileMenu()">Profile</button>

@@ -5,7 +5,6 @@ from tests.models import Topic, Test, Step, Subject, Question, Choice
 from django.contrib.auth import authenticate
 from .models import User
 from rest_framework.fields import CurrentUserDefault
-
 class RegistrationSerializer(serializers.ModelSerializer):
     password = serializers.CharField(
         max_length = 128,
@@ -41,7 +40,6 @@ class LoginSerializer(serializers.Serializer):
         # our database.
         email = data.get('email', None)
         password = data.get('password', None)
-
         # Raise an exception if an
         # email is not provided.
         if email is None:
@@ -153,26 +151,25 @@ class QuestionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Question
         fields = ('id', 'question_text', 'choices')
-class TestSerializer(serializers.ModelSerializer):
-    creator = serializers.ReadOnlyField(source = 'creator.username')
-    topic = serializers.ReadOnlyField(source = 'topic.name')
-    subjects = SubjectSerializer(many = True, read_only = True)
-    questions = QuestionSerializer(many = True, read_only = True)
-    
-    edit = serializers.SerializerMethodField()
-    def get_edit(self, obj):
-        return self.context['request'].user == obj.creator
-    #name = serializers.HyperlinkedIdentityField(view_name = 'test-name', format = 'html')
-    class Meta:
-        model = Test
-        fields = ('id', 'url', 'name', 'pub_date', 'creator', 'topic', 'slug', 'icon', 'subjects', 'questions', 'edit')
-        
 class TopicSerializer(serializers.HyperlinkedModelSerializer):
     creator = serializers.ReadOnlyField(source = 'creator.username')
     creat_date = serializers.ReadOnlyField()
     class Meta:
         model = Topic
         fields = ('id', 'name', 'creat_date', 'creator', 'icon', 'test_set',)
+class TestSerializer(serializers.ModelSerializer):
+    creator = serializers.ReadOnlyField(source = 'creator.username')
+    topic_name = serializers.ReadOnlyField(source = 'topic.name')
+    subjects = SubjectSerializer(many = True, read_only = True)
+    questions = QuestionSerializer(many = True, read_only = True)
+    edit = serializers.SerializerMethodField()
+    def get_edit(self, obj):
+        return self.context['request'].user == obj.creator
+    #name = serializers.HyperlinkedIdentityField(view_name = 'test-name', format = 'html')
+    class Meta:
+        model = Test
+        fields = ('id', 'url', 'name', 'topic_name', 'pub_date', 'creator', 'topic', 'slug', 'icon', 'subjects', 'questions', 'edit')
+
 class TopicSelectSerializer(serializers.ModelSerializer):
     text = serializers.CharField(source='name')
     class Meta:

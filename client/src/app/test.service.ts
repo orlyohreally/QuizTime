@@ -21,11 +21,17 @@ export class TestService {
         
     }
     postTest(test: Test): Observable<any> {
+        console.log('post', test);
         /*if(test.id != undefined)
             return this.http.post<any>(this.testsUrl + test.id, {"test": test});
         else
-            */return this.http.post<any>(this.testsUrl, {"name": test.name, "icon": test.icon, "slug": test.slug}); 
-        
+            */
+        let formData: FormData = new FormData();
+        formData.append("name", test.name);
+        formData.append("slug", test.slug);
+        formData.append("icon", test.icon);
+        formData.append("topic", test.topic + "");
+        return this.http.post<any>(this.testsUrl, formData);
     }
     getTopicsForSelect(): Observable<any[]> {
         return this.http.get<any>(this.topicsSelectUrl)

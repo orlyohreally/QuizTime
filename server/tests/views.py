@@ -14,25 +14,12 @@ from rest_framework.generics import RetrieveUpdateAPIView
 from django.utils import timezone
 import datetime
 from django.shortcuts import get_object_or_404
-
 class RegistrationAPIView(APIView):
     permission_classes = (AllowAny,)
     serializer_class = RegistrationSerializer
     renderer_classes = (UserJSONRenderer,)
     def post(self, request):
-        print(request.POST)
-        print(request.data)
-        print(request.data.get('user', {}))
         user = request.data.get('user', {});
-        #user.email = request.data.get('email')
-        #user.password = request.data.get('password')
-        try:
-            print(request.data.get('user', {}))
-            
-        except:
-            print('no')
-        #user = request.data.get('user', {})
-        
         serializer = self.serializer_class(data=user)
         serializer.is_valid(raise_exception=True)
         serializer.save()
@@ -59,20 +46,19 @@ class LoginAPIView(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 class TestViewSet(viewsets.ModelViewSet):
     queryset = Test.objects.filter(pub_date__lte=datetime.datetime.now(tz=timezone.utc))
-    
     serializer_class = TestSerializer
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsCreatorOrReadOnly,)
     def get_queryset(self):
         queryset = Test.objects.filter(pub_date__lte=datetime.datetime.now(tz=timezone.utc))
         topic = self.request.query_params.get('topic')
-        print(topic)
         if topic != None:
             queryset.filter(topic = topic)
-        print(queryset)
         return queryset
     
     def perform_create(self, serializer):
+        print('look', self.request)
         serializer.save(creator = self.request.user)
+
 
 class UserRetrieveUpdateAPIView(RetrieveUpdateAPIView):
     permission_classes = (IsAuthenticated,)

@@ -74,7 +74,7 @@ class JWTAuthentication(authentication.BaseAuthentication):
         Try to authenticate the given credentials. If authentication is
         successful, return the user and token. If not, throw an error.
         """
-        print(token)
+        #print(token)
         try:
             payload = jwt.decode(token, settings.SECRET_KEY)
         except:
