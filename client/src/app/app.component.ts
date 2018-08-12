@@ -21,8 +21,8 @@ export class AppComponent  implements OnInit {
             this.modal = value;
         });
     }
-    LoadComponentModal(component) {
-        this.modalService.LoadComponentModal(component);
+    LoadComponentModal(component, data = {}) {
+        this.modalService.LoadComponentModal(component, data);
     }
     ngOnDestroy() {
         this.subscription.unsubscribe();

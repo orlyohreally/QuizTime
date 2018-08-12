@@ -9,9 +9,9 @@ export class ModalService {
         this.modal = new ModalItem(null);;
     }
     modalChange: Subject<ModalItem> = new Subject<ModalItem>();
-    LoadComponentModal(component) {
+    LoadComponentModal(component, data = {}) {
         console.log('service load component', component);
-        this.modal = new ModalItem(component);
+        this.modal = new ModalItem(component, data);
         this.modalChange.next(this.modal);
     }
 }

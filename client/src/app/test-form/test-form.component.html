@@ -1,6 +1,6 @@
 <form [formGroup]="testForm" #lForm="ngForm" class = "modal">
-    <h1 *ngIf="data.id==undefined">Create new test</h1>
-    <h1 *ngIf="data.id!=0">Edit test</h1>
+    <h1 *ngIf="data.id==undefined">Create new test{{data.id}}</h1>
+    <h1 *ngIf="data.id!=undefined">Edit test {{data.id}}</h1>
     <div class = "form-input-holder required">
         <label for = "test_name">Title</label>
         <input id = "test_name" (keydown.enter)="submit_form()" class="form-control" formControlName="test_name" required type = "text" placeholder = "Test name"/>
@@ -27,7 +27,7 @@
     </div>
     <div class = "form-input-holder required">
         <label for="topic">Topic</label>
-        <select2 id = "topic" [data]="topics|async" [width]="200" [cssImport]=true (valueChanged)="TopicChanged($event)"></select2>
+        <select2 id = "topic" [data]="topics|async"  [value]="selected_topic|async" [width]="200" [cssImport]=true (valueChanged)="TopicChanged($event)"></select2>
         <div class = "form-button-holder">
             <button type = "button" >New topic</button>
         </div>
@@ -41,6 +41,8 @@
     </div>
     
     <div class = "form-button-holder">
-        <button *ngIf="data.id==0" type = "button" (click)="CreateTest()" >Create</button>
+        <button *ngIf="data.id==undefined" type = "button" (click)="CreateTest()" >Create</button>
+        <button *ngIf="data.id!=undefined" type = "button" (click)="UpdateTest()" >Update</button>
+        <button *ngIf="data.id!=undefined" type = "button" (click)="DeleteTest()" >Delete</button>
     </div>
 </form>

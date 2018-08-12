@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalService } from '../modal.service';
 import { LoginFormComponent } from '../login-form/login-form.component';
-import { TestFormComponent } from '../test-form/test-form.component';
 
 import { AuthService } from '../auth.service';
 
@@ -30,12 +29,9 @@ export class MainMenuComponent implements OnInit {
         this.collapsed = !this.collapsed;
     }
     ShowLoginForm() {
-        this.collapsed = false;
+        this.collapsed = false;        
+        this.profile_collapsed = true;
         this.modalService.LoadComponentModal(LoginFormComponent);
-    }
-    NewTest() {
-        this.collapsed = false;
-        this.modalService.LoadComponentModal(TestFormComponent);
     }
     ShowProfileMenu() {
         this.profile_collapsed = !this.profile_collapsed;

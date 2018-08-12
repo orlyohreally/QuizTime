@@ -18,20 +18,35 @@ export class TestService {
     }
     getTests(): Observable<any> {
         return this.http.get<any>(this.testsUrl)
-        
+    }
+    getTest(id): Observable<any> {
+        return this.http.get<any>(this.testsUrl + id + '/');
     }
     postTest(test: Test): Observable<any> {
-        console.log('post', test);
-        /*if(test.id != undefined)
-            return this.http.post<any>(this.testsUrl + test.id, {"test": test});
-        else
-            */
         let formData: FormData = new FormData();
         formData.append("name", test.name);
         formData.append("slug", test.slug);
         formData.append("icon", test.icon);
         formData.append("topic", test.topic + "");
         return this.http.post<any>(this.testsUrl, formData);
+    }
+    putTest(test: Test): Observable<any> {
+        let formData: FormData = new FormData();
+        formData.append("name", test.name);
+        formData.append("slug", test.slug);
+        formData.append("icon", test.icon);
+        formData.append("topic", test.topic + "");
+        formData.append("id", test.id + "");
+        return this.http.put<any>(this.testsUrl + test.id + '/', formData);
+    }
+    deleteTest(test: Test): Observable<any> {
+        let formData: FormData = new FormData();
+        formData.append("name", test.name);
+        formData.append("slug", test.slug);
+        formData.append("icon", test.icon);
+        formData.append("topic", test.topic + "");
+        formData.append("id", test.id + "");
+        return this.http.delete<any>(this.testsUrl + test.id + '/', formData);
     }
     getTopicsForSelect(): Observable<any[]> {
         return this.http.get<any>(this.topicsSelectUrl)

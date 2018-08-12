@@ -24,6 +24,7 @@ import { ModalService } from './modal.service';
 import { ModalDirective } from './modal.directive';
 import { ModalComponent } from './modal/modal.component';
 import { SearchQuizPageComponent } from './search-quiz-page/search-quiz-page.component';
+import { MyQuizzesPageComponent } from './my-quizzes-page/my-quizzes-page.component';
 
 import { FooterComponent } from './footer/footer.component';
 
@@ -40,6 +41,7 @@ import { FooterComponent } from './footer/footer.component';
     LoginFormComponent,
     TestFormComponent,
     SearchQuizPageComponent,
+    MyQuizzesPageComponent,
     FooterComponent,
   ],
   entryComponents:[
