@@ -16,7 +16,7 @@ MarkupSafe==1.0
 mock==2.0.0
 pbr==4.2.0
 Pillow==5.1.0
-Pygments==2.2.0
+Pygments==2.7.4
 PyJWT==1.6.4
 pytz==2018.4
 requests==2.18.4
